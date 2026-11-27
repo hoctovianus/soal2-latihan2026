@@ -1,0 +1,2555 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#0f172a">
+<title>Latihan Matematika OSN SMP — Tingkat Kabupaten</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,900&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  /* ---------- Reset & Variables ---------- */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0f172a;
+    --bg-pattern: #111c33;
+    --surface: #1e293b;
+    --surface-2: #243348;
+    --border: #334155;
+    --border-strong: #475569;
+    --text: #e8edf4;
+    --text-muted: #9fb0c3;
+    --text-faint: #6b7d93;
+    --primary: #3b9fe0;
+    --primary-hover: #2b86c7;
+    --primary-soft: #16304a;
+    --primary-ring: rgba(59, 159, 224, 0.30);
+    --accent: #e07b3c;
+    --accent-soft: #3a2415;
+    --success: #22c55e;
+    --success-bg: #15321f;
+    --warning: #e0a53c;
+    --warning-bg: #352a12;
+    --danger: #ef6b6b;
+    --danger-bg: #3a1c1c;
+
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.40);
+    --shadow-md: 0 4px 14px rgba(0, 0, 0, 0.45);
+    --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.55);
+
+    --font-serif: 'Fraunces', 'Georgia', serif;
+    --font-sans: 'Manrope', system-ui, -apple-system, sans-serif;
+    --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+
+    --r-sm: 6px;
+    --r: 10px;
+    --r-lg: 16px;
+    --r-xl: 24px;
+
+    --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  html, body {
+    height: 100%;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    background-image:
+      radial-gradient(circle at 20% 20%, rgba(29, 92, 138, 0.05) 0%, transparent 35%),
+      radial-gradient(circle at 80% 80%, rgba(194, 65, 12, 0.04) 0%, transparent 40%);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  button, input, textarea, select { font: inherit; color: inherit; }
+  button { cursor: pointer; border: none; background: none; }
+  ::selection { background: var(--primary); color: #fff; }
+
+  /* ---------- Screens ---------- */
+  .screen { display: none; min-height: 100vh; }
+  .screen.active { display: block; animation: fadeIn .35s var(--ease); }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ---------- Welcome Screen ---------- */
+  .welcome-wrap {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px 20px;
+  }
+  .welcome-card {
+    width: 100%;
+    max-width: 720px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-xl);
+    padding: 56px 48px;
+    box-shadow: var(--shadow-lg);
+    position: relative;
+    overflow: hidden;
+  }
+  .welcome-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 6px;
+    background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
+  }
+  .brand-mark {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 14px;
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    background: var(--surface-2);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+  }
+  .brand-mark .dot {
+    width: 6px; height: 6px;
+    background: var(--primary);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%,100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.3); }
+  }
+  .welcome-title {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 16px;
+    color: var(--text);
+  }
+  .welcome-title em {
+    font-style: italic;
+    color: var(--primary);
+    font-weight: 400;
+  }
+  .welcome-sub {
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    max-width: 560px;
+    margin-bottom: 36px;
+  }
+
+  /* ===== REVISI 1: rules-grid jadi 4 kolom dalam 1 baris ===== */
+  .rules-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-bottom: 30px;
+  }
+  .rule-item {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: var(--r);
+    padding: 12px 14px;
+  }
+  .rule-item .rl-label {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-faint);
+    margin-bottom: 4px;
+  }
+  .rule-item .rl-value {
+    font-family: var(--font-serif);
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.2;
+    white-space: nowrap;
+  }
+  .rule-item .rl-value.pass-value {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1px;
+  }
+  .rule-item .rl-value.pass-value input {
+    width: 52px;
+    padding: 3px 4px;
+    text-align: center;
+    font-family: var(--font-serif);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--primary);
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: var(--r-sm);
+    transition: all .15s var(--ease);
+  }
+  .rule-item .rl-value.pass-value input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px var(--primary-ring);
+  }
+
+  .mode-section-title {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    margin-bottom: 14px;
+  }
+  /* Mode buttons: 3 tombol berjejer (Pilihan Ganda · Isian Singkat · Essay Project) */
+  .mode-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+  .mode-cell {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .mode-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    width: 100%;
+    height: 100%;
+    padding: 16px 14px;
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: var(--r-lg);
+    text-align: left;
+    transition: all .2s var(--ease);
+    color: var(--text);
+  }
+  .mode-btn:hover {
+    border-color: var(--primary);
+    background: var(--primary-soft);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+  .mode-btn .mb-icon {
+    width: 32px; height: 32px;
+    display: grid; place-items: center;
+    background: var(--primary);
+    color: #fff;
+    border-radius: 8px;
+    margin-bottom: 4px;
+  }
+  .mode-btn[data-mode="essay"] .mb-icon { background: var(--accent); }
+  .mode-btn[data-mode="project"] .mb-icon { background: var(--success); }
+  .mode-btn .mb-name {
+    font-family: var(--font-serif);
+    font-size: 1.08rem;
+    font-weight: 600;
+  }
+  .mode-btn .mb-desc {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    line-height: 1.3;
+  }
+  .mode-time {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 8px 12px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: var(--r-sm);
+  }
+  .mode-time label {
+    font-size: 0.74rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    white-space: nowrap;
+  }
+  .mode-time input {
+    width: 64px;
+    padding: 6px 8px;
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text);
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: var(--r-sm);
+    transition: all .15s var(--ease);
+  }
+  .mode-time input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px var(--primary-ring);
+  }
+  .mode-time-note {
+    margin-top: 12px;
+    font-size: 0.8rem;
+    color: var(--text-faint);
+    text-align: center;
+    line-height: 1.4;
+  }
+
+  /* ===== Rekap Nilai Gabungan (Overall) ===== */
+  .recap {
+    margin-top: 26px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--r-lg);
+    padding: 20px 22px;
+    background: var(--surface-2);
+  }
+  .recap-head {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 12px; margin-bottom: 14px;
+  }
+  .recap-title {
+    font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; color: var(--text);
+  }
+  .recap-reset {
+    font-size: 0.78rem; font-weight: 600; color: var(--text-muted);
+    padding: 6px 12px; border: 1px solid var(--border); border-radius: var(--r-sm);
+    background: var(--surface); transition: all .15s var(--ease);
+  }
+  .recap-reset:hover { color: var(--accent); border-color: var(--accent); }
+  .recap-rows { display: grid; gap: 8px; margin-bottom: 14px; }
+  .recap-row {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 14px; background: var(--surface);
+    border: 1px solid var(--border); border-radius: var(--r-sm);
+    font-size: 0.92rem; color: var(--text);
+  }
+  .recap-row .rr-name { font-weight: 500; }
+  .recap-row .recap-val {
+    font-family: var(--font-mono); font-weight: 700; font-size: 1rem; color: var(--text);
+  }
+  .recap-overall {
+    display: flex; align-items: center; gap: 18px; flex-wrap: wrap;
+    padding: 16px 18px; border-radius: var(--r); border: 1.5px solid var(--border);
+    background: var(--surface);
+  }
+  .recap-overall.pass { background: var(--success-bg, #E7F4EC); border-color: var(--success); }
+  .recap-overall.fail { background: var(--warning-bg); border-color: var(--accent); }
+  .recap-overall .ro-left { display: flex; flex-direction: column; gap: 2px; }
+  .recap-overall .ro-label { font-size: 0.78rem; color: var(--text-muted); }
+  .recap-overall .ro-percent {
+    font-family: var(--font-serif); font-weight: 700; font-size: 2rem; line-height: 1; color: var(--text);
+  }
+  .recap-overall.pass .ro-percent { color: var(--success); }
+  .recap-overall.fail .ro-percent { color: var(--accent); }
+  .recap-overall .ro-status {
+    flex: 1; min-width: 180px; font-size: 0.9rem; font-weight: 600; color: var(--text);
+    padding-left: 18px; border-left: 1px solid var(--border);
+  }
+  .recap-note {
+    margin-top: 12px; font-size: 0.78rem; color: var(--text-faint); line-height: 1.45;
+  }
+  .recap-warn {
+    margin-top: 10px; font-size: 0.8rem; line-height: 1.5;
+    background: var(--warning-bg); border: 1px solid #5e4e22;
+    border-radius: var(--r-sm); padding: 12px 14px; color: var(--text);
+  }
+
+  /* ---------- Dashboard Riwayat ---------- */
+  .history-open-btn {
+    margin-top: 14px; width: 100%; padding: 13px 16px;
+    font-family: var(--font-sans); font-size: 0.95rem; font-weight: 700;
+    color: var(--primary); background: var(--primary-soft);
+    border: 1px solid var(--primary); border-radius: var(--r);
+    cursor: pointer; transition: all .15s var(--ease);
+  }
+  .history-open-btn:hover { background: var(--primary); color: #fff; }
+  .hist-wrap { max-width: 1040px; margin: 0 auto; padding: 32px 20px 64px; }
+  .hist-head {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 14px; flex-wrap: wrap; margin-bottom: 6px;
+  }
+  .hist-title { font-family: var(--font-serif); font-size: 1.7rem; color: var(--text); margin: 0; }
+  .hist-sub { color: var(--text-muted); font-size: 0.92rem; margin: 0 0 22px; line-height: 1.55; }
+  .hist-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+  .hist-btn {
+    font-family: var(--font-sans); font-size: 0.85rem; font-weight: 600;
+    padding: 9px 16px; border-radius: var(--r-sm); cursor: pointer;
+    border: 1px solid var(--border-strong); background: var(--surface); color: var(--text);
+    transition: all .15s var(--ease);
+  }
+  .hist-btn:hover { background: var(--surface-2); }
+  .hist-btn.primary { background: var(--primary); border-color: var(--primary); color: #fff; }
+  .hist-btn.primary:hover { background: var(--primary-hover); }
+  .hist-btn.danger { color: var(--danger); border-color: #6e3030; }
+  .hist-btn.danger:hover { background: var(--danger-bg); }
+  .hist-cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 26px; }
+  @media (max-width: 720px) { .hist-cards { grid-template-columns: repeat(2, 1fr); } }
+  .hist-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--r); padding: 16px 18px; box-shadow: var(--shadow-sm);
+  }
+  .hc-label { font-size: 0.76rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-faint); font-weight: 700; }
+  .hc-value { font-family: var(--font-serif); font-size: 1.9rem; color: var(--text); margin-top: 6px; line-height: 1.1; }
+  .hc-note { font-size: 0.78rem; color: var(--text-muted); margin-top: 4px; }
+  .hist-panel {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--r-lg); padding: 20px 22px; margin-bottom: 22px; box-shadow: var(--shadow-sm);
+  }
+  .hist-panel h3 {
+    font-family: var(--font-serif); font-size: 1.15rem; margin: 0 0 4px; color: var(--text);
+  }
+  .hist-panel .hp-note { font-size: 0.82rem; color: var(--text-muted); margin: 0 0 16px; line-height: 1.5; }
+  .hist-legend { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 12px; font-size: 0.82rem; color: var(--text-muted); }
+  .hl-item { display: inline-flex; align-items: center; gap: 6px; }
+  .hl-dot { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
+  .hist-chart { overflow-x: auto; padding-bottom: 4px; }
+  .hist-table-wrap { overflow-x: auto; }
+  table.hist-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+  table.hist-table th, table.hist-table td {
+    padding: 9px 12px; text-align: left; border-bottom: 1px solid var(--border); white-space: nowrap;
+  }
+  table.hist-table th {
+    font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em;
+    color: var(--text-faint); font-weight: 700; background: var(--surface-2);
+  }
+  table.hist-table td.num { font-family: var(--font-mono); }
+  table.hist-table tr:last-child td { border-bottom: none; }
+  .pill {
+    display: inline-block; padding: 2px 9px; border-radius: 999px;
+    font-size: 0.74rem; font-weight: 700;
+  }
+  .pill.pass { background: var(--success-bg); color: var(--success); }
+  .pill.fail { background: var(--danger-bg); color: var(--danger); }
+  .pill.ver { background: var(--primary-soft); color: var(--primary); font-family: var(--font-mono); }
+  .hist-empty {
+    text-align: center; padding: 40px 20px; color: var(--text-muted);
+    font-size: 0.95rem; line-height: 1.6;
+  }
+  .hist-warn {
+    font-size: 0.82rem; line-height: 1.55; background: var(--warning-bg);
+    border: 1px solid #5e4e22; border-radius: var(--r-sm);
+    padding: 12px 14px; color: var(--text); margin-bottom: 20px;
+  }
+
+  .welcome-footer {
+    margin-top: 30px;
+    padding-top: 18px;
+    border-top: 1px dashed var(--border);
+    font-size: 13px;
+    color: var(--text-faint);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  /* ---------- Exam Screen ---------- */
+  .exam-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(15, 23, 42, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .header-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-width: 0;
+  }
+  .header-logo {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--text);
+    white-space: nowrap;
+  }
+  .header-logo em { font-style: italic; color: var(--primary); }
+  .mode-badge {
+    padding: 4px 10px;
+    border-radius: 100px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    background: var(--primary-soft);
+    color: var(--primary);
+    border: 1px solid var(--primary-soft);
+  }
+  .mode-badge.essay { background: var(--accent-soft); color: var(--accent); border-color: var(--accent-soft); }
+
+  .timer {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 18px;
+    background: var(--surface);
+    border: 1.5px solid var(--border-strong);
+    border-radius: var(--r);
+    box-shadow: var(--shadow-sm);
+    transition: all .3s var(--ease);
+  }
+  .timer .timer-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    line-height: 1;
+  }
+  .timer .timer-value {
+    font-family: var(--font-mono);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+  .timer.warning {
+    background: var(--warning-bg);
+    border-color: var(--warning);
+  }
+  .timer.warning .timer-value { color: var(--warning); }
+  .timer.danger {
+    background: var(--danger-bg);
+    border-color: var(--danger);
+    animation: shake 0.6s var(--ease) infinite;
+  }
+  .timer.danger .timer-value { color: var(--danger); }
+  @keyframes shake {
+    0%,100% { transform: translateX(0); }
+    25% { transform: translateX(-2px); }
+    75% { transform: translateX(2px); }
+  }
+
+  /* ---------- Exam Body ---------- */
+  .exam-body {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 28px 20px 120px;
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: 28px;
+  }
+
+  .question-section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .progress-bar {
+    height: 6px;
+    background: var(--border);
+    border-radius: 100px;
+    overflow: hidden;
+    position: relative;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+    border-radius: 100px;
+    transition: width .35s var(--ease);
+    width: 0%;
+  }
+
+  .question-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .question-num {
+    font-family: var(--font-serif);
+    font-size: 1.05rem;
+    color: var(--text-muted);
+  }
+  .question-num span { color: var(--text); font-weight: 600; }
+  .answered-count {
+    font-size: 13px;
+    color: var(--text-muted);
+    padding: 4px 10px;
+    background: var(--surface-2);
+    border-radius: 100px;
+    border: 1px solid var(--border);
+  }
+
+  .question-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-lg);
+    padding: 36px;
+    box-shadow: var(--shadow-sm);
+  }
+  .question-text {
+    font-family: var(--font-serif);
+    font-size: clamp(1.2rem, 2.5vw, 1.55rem);
+    line-height: 1.45;
+    color: var(--text);
+    margin-bottom: 28px;
+    font-weight: 500;
+    white-space: pre-wrap;
+  }
+  .question-text .q-intro {
+    white-space: pre-wrap;
+    margin-bottom: 14px;
+  }
+  .question-text .q-code {
+    font-family: var(--font-mono);
+    font-size: 0.92rem;
+    font-weight: 500;
+    line-height: 1.6;
+    color: #E8EEF2;
+    background: #1B2A38;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--r);
+    padding: 16px 18px;
+    margin: 0;
+    overflow-x: auto;
+    white-space: pre;
+    -webkit-font-smoothing: auto;
+  }
+
+  /* MC Options */
+  .options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .option {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 16px 20px;
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: var(--r);
+    cursor: pointer;
+    transition: all .15s var(--ease);
+    user-select: none;
+  }
+  .option:hover {
+    border-color: var(--border-strong);
+    background: var(--surface-2);
+  }
+  .option .opt-letter {
+    width: 28px; height: 28px;
+    border: 1.5px solid var(--border-strong);
+    border-radius: 50%;
+    display: grid; place-items: center;
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--text-muted);
+    flex-shrink: 0;
+    background: var(--surface);
+    transition: all .15s var(--ease);
+    text-transform: uppercase;
+  }
+  .option .opt-text {
+    flex: 1;
+    padding-top: 3px;
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+  .option input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .option.selected {
+    border-color: var(--primary);
+    background: var(--primary-soft);
+  }
+  .option.selected .opt-letter {
+    background: var(--primary);
+    color: #fff;
+    border-color: var(--primary);
+  }
+
+  /* Essay Input */
+  .essay-input {
+    width: 100%;
+    padding: 16px 20px;
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: var(--r);
+    font-size: 1rem;
+    color: var(--text);
+    font-family: var(--font-sans);
+    transition: all .15s var(--ease);
+    resize: vertical;
+    min-height: 64px;
+  }
+  .essay-input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px var(--primary-ring);
+  }
+  .essay-hint {
+    margin-top: 10px;
+    font-size: 13px;
+    color: var(--text-faint);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* ---------- Essay Project mode ---------- */
+  .project-brief {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--success);
+    border-radius: var(--r);
+    padding: 18px 20px;
+    margin-bottom: 18px;
+    white-space: pre-wrap;
+    font-family: var(--font-sans);
+    font-size: 0.98rem;
+    line-height: 1.55;
+    color: var(--text);
+  }
+  .project-brief .pb-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--success);
+    margin-bottom: 8px;
+  }
+  .project-code-input {
+    width: 100%;
+    padding: 16px 18px;
+    background: #1B2A38;
+    border: 1.5px solid var(--border-strong);
+    border-radius: var(--r);
+    font-size: 0.95rem;
+    color: #E8EEF2;
+    font-family: var(--font-mono);
+    line-height: 1.6;
+    transition: all .15s var(--ease);
+    resize: vertical;
+    min-height: 220px;
+    tab-size: 4;
+  }
+  .project-code-input:focus {
+    outline: none;
+    border-color: var(--success);
+    box-shadow: 0 0 0 4px rgba(21,128,61,0.18);
+  }
+  /* Project result screen */
+  .project-result-wrap {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 20px 80px;
+  }
+  .pr-banner {
+    background: linear-gradient(135deg, var(--success) 0%, var(--primary) 100%);
+    color: #fff;
+    border-radius: var(--r-lg);
+    padding: 32px 36px;
+    margin-bottom: 24px;
+  }
+  .pr-banner .pr-label {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.18em;
+    text-transform: uppercase; opacity: 0.85; margin-bottom: 8px;
+  }
+  .pr-banner .pr-title {
+    font-family: var(--font-serif); font-size: clamp(1.8rem, 4vw, 2.6rem);
+    font-weight: 600; line-height: 1.1; margin-bottom: 10px;
+  }
+  .pr-banner .pr-msg { opacity: 0.92; max-width: 560px; }
+  .pr-section { margin-bottom: 24px; }
+  .pr-section h3 {
+    font-family: var(--font-serif); font-size: 1.25rem; font-weight: 600;
+    margin-bottom: 12px; color: var(--text);
+  }
+  .pr-code {
+    font-family: var(--font-mono); font-size: 0.9rem; line-height: 1.6;
+    color: #E8EEF2; background: #1B2A38; border: 1px solid var(--border-strong);
+    border-radius: var(--r); padding: 16px 18px; margin: 0;
+    overflow-x: auto; white-space: pre;
+  }
+  .pr-code.empty { color: var(--text-faint); font-style: italic; white-space: pre-wrap; }
+  .pr-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 860px) { .pr-compare { grid-template-columns: 1fr; } }
+  .pr-col { min-width: 0; }
+  .pr-col-head {
+    font-family: var(--font-sans); font-size: 0.8rem; font-weight: 700;
+    letter-spacing: 0.04em; text-transform: uppercase;
+    padding: 8px 12px; border-radius: var(--r-sm) var(--r-sm) 0 0;
+    border: 1px solid var(--border-strong); border-bottom: none;
+  }
+  .pr-col-head.user { background: #3a1c1c; color: #fca5a5; }
+  .pr-col-head.model { background: #15321f; color: #86efac; }
+  .pr-col .pr-code { border-radius: 0 0 var(--r) var(--r); }
+  .pr-checks { display: grid; gap: 8px; }
+  .pc-item {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--surface); border: 1px solid var(--border);
+    border-left-width: 4px; border-radius: var(--r-sm); padding: 12px 14px;
+  }
+  .pc-item.ok { border-left-color: #10B981; }
+  .pc-item.no { border-left-color: #EF4444; }
+  .pc-mark {
+    font-size: 1rem; font-weight: 800; line-height: 1.4;
+    width: 24px; text-align: center; flex-shrink: 0;
+  }
+  .pc-item.ok .pc-mark { color: #34d399; }
+  .pc-item.no .pc-mark { color: #f87171; }
+  .pc-body { min-width: 0; }
+  .pc-label { font-size: 0.95rem; color: var(--text); font-weight: 600; }
+  .pc-hint { font-size: 0.82rem; color: var(--text-faint); margin-top: 4px; }
+  .pc-hint code { font-family: var(--font-mono); font-size: 0.82rem; }
+  .pc-verdict { font-size: 0.82rem; margin-top: 4px; font-weight: 600; }
+  .pc-item.ok .pc-verdict { color: #34d399; }
+  .pc-item.no .pc-verdict { color: #f87171; }
+  .pr-formula {
+    margin-top: 12px; padding: 14px 16px; border-radius: var(--r-sm);
+    background: var(--warning-bg); border: 1px solid #5e4e22;
+    font-size: 0.9rem; color: var(--text); line-height: 1.6;
+  }
+  .pr-rubric { list-style: none; display: grid; gap: 8px; }
+  .pr-rubric li {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--r-sm); padding: 12px 14px;
+    display: flex; align-items: flex-start; gap: 10px;
+    font-size: 0.95rem; color: var(--text);
+  }
+  .pr-rubric li::before {
+    content: '☐'; color: var(--success); font-size: 1.1rem; line-height: 1.3;
+  }
+  .pr-note {
+    background: var(--warning-bg); border: 1px solid #5e4e22;
+    border-radius: var(--r); padding: 14px 16px; font-size: 0.9rem;
+    color: var(--text); margin-bottom: 24px;
+  }
+  /* Kartu nilai kemiripan Essay Project */
+  .pr-score {
+    display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
+    border-radius: var(--r-lg); padding: 22px 26px; margin-bottom: 18px;
+    border: 1.5px solid var(--border);
+  }
+  .pr-score.pass { background: var(--success-bg, #E7F4EC); border-color: var(--success); }
+  .pr-score.fail { background: var(--warning-bg); border-color: var(--accent); }
+  .pr-score .prs-left { display: flex; align-items: center; gap: 14px; }
+  .pr-score .prs-percent {
+    font-family: var(--font-serif); font-weight: 700;
+    font-size: clamp(2.4rem, 6vw, 3.2rem); line-height: 1;
+  }
+  .pr-score.pass .prs-percent { color: var(--success); }
+  .pr-score.fail .prs-percent { color: var(--accent); }
+  .pr-score .prs-caption { font-size: 0.82rem; color: var(--text-muted); line-height: 1.3; }
+  .pr-score .prs-status {
+    font-weight: 700; font-size: 1rem; color: var(--text);
+    padding-left: 20px; border-left: 1px solid var(--border); flex: 1; min-width: 200px;
+  }
+
+  /* Navigation Controls */
+  .nav-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 24px;
+    border-radius: var(--r);
+    font-size: 0.95rem;
+    font-weight: 600;
+    transition: all .15s var(--ease);
+    border: 1.5px solid transparent;
+    white-space: nowrap;
+  }
+  .btn-primary { background: var(--primary); color: #fff; border-color: var(--primary); }
+  .btn-primary:hover:not(:disabled) { background: var(--primary-hover); transform: translateY(-1px); box-shadow: var(--shadow-md); }
+  .btn-secondary { background: var(--surface); color: var(--text); border-color: var(--border-strong); }
+  .btn-secondary:hover:not(:disabled) { background: var(--surface-2); border-color: var(--text-muted); }
+  .btn-danger { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn-danger:hover:not(:disabled) { background: #9c3409; transform: translateY(-1px); }
+  .btn-ghost { color: var(--text-muted); }
+  .btn-ghost:hover { color: var(--text); background: var(--surface-2); }
+  .btn:disabled { opacity: 0.45; cursor: not-allowed; }
+
+  /* ---------- Sidebar (REVISI 3: lebih compact) ---------- */
+  .sidebar {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-lg);
+    padding: 20px;
+    height: fit-content;
+    position: sticky;
+    top: 90px;
+    box-shadow: var(--shadow-sm);
+  }
+  .sidebar-title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+  }
+  /* ===== REVISI 3: Tombol nav lebih compact (height tetap kecil, bukan aspect-ratio square) ===== */
+  .question-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 4px;
+    margin-bottom: 14px;
+  }
+  .q-btn {
+    height: 26px;
+    border: 1.5px solid var(--border);
+    border-radius: 5px;
+    background: var(--surface);
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-muted);
+    transition: all .15s var(--ease);
+    padding: 0;
+  }
+  .q-btn:hover { border-color: var(--text-muted); color: var(--text); }
+  .q-btn.answered {
+    background: var(--primary-soft);
+    border-color: var(--primary);
+    color: var(--primary);
+  }
+  .q-btn.current {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: #fff;
+    transform: scale(1.08);
+    box-shadow: 0 4px 10px var(--primary-ring);
+  }
+
+  .legend {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    font-size: 11px;
+    margin-bottom: 14px;
+    padding-bottom: 14px;
+    border-bottom: 1px dashed var(--border);
+  }
+  .legend-item { display: flex; align-items: center; gap: 8px; color: var(--text-muted); }
+  .legend-box {
+    width: 12px; height: 12px;
+    border-radius: 3px;
+    border: 1.5px solid var(--border);
+  }
+  .legend-box.answered { background: var(--primary-soft); border-color: var(--primary); }
+  .legend-box.current { background: var(--primary); border-color: var(--primary); }
+
+  .submit-btn {
+    width: 100%;
+    padding: 11px;
+    background: var(--accent);
+    color: #fff;
+    border-radius: var(--r);
+    font-weight: 700;
+    font-size: 0.88rem;
+    transition: all .15s var(--ease);
+    letter-spacing: 0.02em;
+  }
+  .submit-btn:hover { background: #9c3409; transform: translateY(-1px); box-shadow: var(--shadow-md); }
+
+  /* ---------- Result Screen ---------- */
+  .result-wrap {
+    min-height: 100vh;
+    padding: 40px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .result-card {
+    width: 100%;
+    max-width: 760px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-xl);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+  }
+  .result-banner {
+    padding: 48px 40px;
+    text-align: center;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+  }
+  .result-banner.pass {
+    background: linear-gradient(135deg, var(--primary) 0%, #1A6B52 100%);
+  }
+  .result-banner.fail {
+    background: linear-gradient(135deg, #B91C1C 0%, #DC2626 100%);
+  }
+  .result-banner::before {
+    content: '';
+    position: absolute;
+    top: -50%; right: -20%;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(255,255,255,0.12) 0%, transparent 70%);
+  }
+  .result-status-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.85;
+    margin-bottom: 10px;
+    position: relative;
+  }
+  .result-status {
+    font-family: var(--font-serif);
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 600;
+    line-height: 1;
+    margin-bottom: 16px;
+    position: relative;
+    letter-spacing: -0.02em;
+  }
+  .result-status em { font-style: italic; }
+  .result-message {
+    font-size: 1.05rem;
+    opacity: 0.92;
+    max-width: 480px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .result-stats {
+    padding: 36px 40px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 20px;
+    border-bottom: 1px solid var(--border);
+  }
+  .stat-block {
+    text-align: center;
+  }
+  .stat-label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+  }
+  .stat-value {
+    font-family: var(--font-serif);
+    font-size: 2.2rem;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.2;
+  }
+  .stat-value.correct { color: var(--success); }
+  .stat-value.wrong { color: var(--danger); }
+
+  .result-actions {
+    padding: 28px 40px;
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  /* ---------- Review Screen ---------- */
+  .review-wrap {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 20px 80px;
+  }
+  .review-header {
+    margin-bottom: 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .review-title {
+    font-family: var(--font-serif);
+    font-size: 2rem;
+    font-weight: 500;
+    line-height: 1.2;
+  }
+  .review-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .review-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--border-strong);
+    border-radius: var(--r);
+    padding: 22px 26px;
+  }
+  .review-item.correct { border-left-color: var(--success); }
+  .review-item.wrong { border-left-color: var(--danger); }
+  .review-item.skipped { border-left-color: var(--warning); }
+  .review-q-num {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .review-status {
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 10px;
+  }
+  .review-status.correct { background: var(--success-bg); color: var(--success); }
+  .review-status.wrong { background: var(--danger-bg); color: var(--danger); }
+  .review-status.skipped { background: var(--warning-bg); color: var(--warning); }
+  .review-question {
+    font-family: var(--font-serif);
+    font-size: 1.1rem;
+    margin-bottom: 14px;
+    line-height: 1.4;
+    color: var(--text);
+    white-space: pre-wrap;
+  }
+  .review-answers {
+    display: grid;
+    gap: 8px;
+  }
+  .review-answer {
+    padding: 10px 14px;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+  }
+  .review-answer .ra-label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    margin-right: 8px;
+  }
+  .review-answer.user-wrong { background: var(--danger-bg); border-color: #6e3030; }
+  .review-answer.user-correct { background: var(--success-bg); border-color: #2f6b43; }
+  .review-answer.actual { background: var(--success-bg); border-color: #2f6b43; }
+  .review-answer.skipped { background: var(--warning-bg); border-color: #5e4e22; }
+
+  /* ---------- Modal ---------- */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(31, 27, 22, 0.55);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    padding: 20px;
+  }
+  .modal-overlay.active { display: flex; animation: fadeIn .25s var(--ease); }
+  .modal {
+    background: var(--surface);
+    border-radius: var(--r-lg);
+    padding: 32px;
+    max-width: 440px;
+    width: 100%;
+    box-shadow: var(--shadow-lg);
+  }
+  .modal-title {
+    font-family: var(--font-serif);
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  .modal-text {
+    color: var(--text-muted);
+    margin-bottom: 24px;
+  }
+  .modal-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 960px) {
+    .exam-body {
+      grid-template-columns: 1fr;
+      padding: 20px 16px 100px;
+    }
+    .sidebar {
+      position: static;
+      order: 2;
+    }
+    .question-card { padding: 28px 22px; }
+  }
+
+  @media (max-width: 640px) {
+    .welcome-card { padding: 36px 24px; }
+    .rules-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; } /* 2×2 di mobile */
+    .header-inner { padding: 12px 14px; flex-wrap: wrap; gap: 10px; }
+    .header-logo { font-size: 1rem; }
+    .timer { padding: 8px 14px; }
+    .timer .timer-value { font-size: 1.1rem; }
+    .mode-grid { grid-template-columns: 1fr; }
+    .question-text { font-size: 1.1rem; }
+    .question-card { padding: 22px 18px; }
+    .option { padding: 14px 16px; gap: 12px; }
+    .option .opt-letter { width: 26px; height: 26px; font-size: 12px; }
+    .nav-controls { flex-direction: column; }
+    .nav-controls .btn { width: 100%; }
+    .result-banner { padding: 36px 24px; }
+    .result-stats { padding: 28px 22px; grid-template-columns: repeat(2, 1fr); }
+    .result-actions { padding: 22px; flex-direction: column; }
+    .result-actions .btn { width: 100%; }
+    .question-grid { grid-template-columns: repeat(8, 1fr); }
+    .review-item { padding: 18px 18px; }
+    .review-title { font-size: 1.6rem; }
+  }
+
+  @media (max-width: 380px) {
+    .question-grid { grid-template-columns: repeat(6, 1fr); }
+    .welcome-card { padding: 28px 20px; }
+  }
+
+  /* Hide MC for essay mode, hide essay for MC mode */
+  .mc-only, .essay-only { display: none; }
+  .mode-mc .mc-only { display: block; }
+  .mode-essay .essay-only { display: block; }
+
+  /* Focus styles */
+  *:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+  button:focus-visible { outline-offset: 2px; }
+
+.pr-proj-block { margin-top: 22px; }
+.pr-proj-block:first-child { margin-top: 4px; }
+.pr-proj-head { font-weight: 800; font-size: 15px; padding: 10px 14px; border-radius: 12px; margin: 0 0 14px; }
+.pr-proj-head.pass { background: rgba(21,128,61,.12); color: #15803D; }
+.pr-proj-head.fail { background: rgba(220,38,38,.10); color: #B91C1C; }
+</style>
+</head>
+<body>
+
+<!-- ===================== WELCOME SCREEN ===================== -->
+<section id="welcome" class="screen active">
+  <div class="welcome-wrap">
+    <div class="welcome-card">
+      <div class="brand-mark"><span class="dot"></span><span>Olimpiade Matematika · SMP · Tingkat Kabupaten</span></div>
+      <h1 class="welcome-title">Latihan <em>Matematika OSN</em></h1>
+      <p class="welcome-sub">Selamat datang, calon juara OSN! Uji kemampuanmu pada soal-soal Olimpiade Sains Nasional Matematika SMP setingkat <em>Kabupaten/Kota</em> — meliputi Bilangan, Aritmatika, Geometri, Statistika &amp; Pengukuran, hingga Kombinatorika. Kerjakan dengan teliti, lalu lihat hasil dan tinjauan jawabanmu.</p>
+
+      <!-- Kartu info latihan -->
+      <div class="rules-grid">
+        <div class="rule-item">
+          <div class="rl-label">Total Soal</div>
+          <div class="rl-value">50 Soal</div>
+        </div>
+        <div class="rule-item">
+          <div class="rl-label">Durasi/Sesi</div>
+          <div class="rl-value">Fleksibel</div>
+        </div>
+        <div class="rule-item">
+          <div class="rl-label">Batas Lulus</div>
+          <div class="rl-value pass-value">&gt;&nbsp;<input type="number" id="passThreshold" value="60" min="1" max="100" inputmode="numeric">%</div>
+        </div>
+        <div class="rule-item">
+          <div class="rl-label">Materi</div>
+          <div class="rl-value">5 Kelompok</div>
+        </div>
+      </div>
+
+      <div class="mode-section-title">Pilih Tipe Latihan</div>
+      <div class="mode-grid">
+        <div class="mode-cell">
+          <button class="mode-btn" data-mode="mc" onclick="startExam('mc')">
+            <div class="mb-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+            </div>
+            <div class="mb-name">Pilihan Ganda</div>
+            <div class="mb-desc">50 soal · pilih a–d</div>
+          </button>
+          <div class="mode-time">
+            <label for="time-mc">Waktu (menit)</label>
+            <input type="number" id="time-mc" value="30" min="1" max="180" inputmode="numeric">
+          </div>
+        </div>
+        <div class="mode-cell">
+          <button class="mode-btn" data-mode="essay" onclick="startExam('essay')">
+            <div class="mb-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+            </div>
+            <div class="mb-name">Isian Singkat</div>
+            <div class="mb-desc">25 soal · jawaban singkat</div>
+          </button>
+          <div class="mode-time">
+            <label for="time-essay">Waktu (menit)</label>
+            <input type="number" id="time-essay" value="30" min="1" max="180" inputmode="numeric">
+          </div>
+        </div>
+        <div class="mode-cell">
+          <button class="mode-btn" data-mode="project" onclick="startExam('project')">
+            <div class="mb-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            </div>
+            <div class="mb-name">Soal Uraian</div>
+            <div class="mb-desc">4 soal · tulis langkah</div>
+          </button>
+          <div class="mode-time">
+            <label for="time-project">Waktu (menit)</label>
+            <input type="number" id="time-project" value="35" min="1" max="180" inputmode="numeric">
+          </div>
+        </div>
+      </div>
+      <div class="mode-time-note">⏱️ Atur sendiri durasi tiap tipe latihan pada kolom di atas (1–180 menit) sebelum menekan tombolnya.</div>
+
+      <!-- ===== REKAP NILAI GABUNGAN (OVERALL) ===== -->
+      <div class="recap" id="recapPanel">
+        <div class="recap-head">
+          <div class="recap-title">Rekap Nilai Gabungan (Overall)</div>
+          <button type="button" class="recap-reset" onclick="resetScores()">Reset Nilai</button>
+        </div>
+        <div class="recap-rows">
+          <div class="recap-row"><span class="rr-name">Pilihan Ganda</span><span class="recap-val" id="recapMc">—</span></div>
+          <div class="recap-row"><span class="rr-name">Isian Singkat</span><span class="recap-val" id="recapEssay">—</span></div>
+          <div class="recap-row"><span class="rr-name">Essay Project</span><span class="recap-val" id="recapProject">—</span></div>
+        </div>
+        <div class="recap-overall" id="recapOverall">
+          <div class="ro-left">
+            <div class="ro-label">Nilai Rata-rata Gabungan</div>
+            <div class="ro-percent" id="recapOverallPct">—</div>
+          </div>
+          <div class="ro-status" id="recapStatus">Selesaikan ketiga tipe latihan untuk melihat status kelulusan gabungan.</div>
+        </div>
+        <div class="recap-note">Nilai gabungan = rata-rata dari ketiga tipe (Pilihan Ganda + Isian Singkat + Essay Project). Peserta dinyatakan LULUS bila nilai gabungan ≥ Batas Lulus. Bila penyimpanan tersedia, nilai tetap tersimpan di perangkat ini sampai ditekan "Reset Nilai".</div>
+        <button type="button" class="history-open-btn" onclick="openHistory()">📊 Buka Dashboard Riwayat</button>
+        <div class="recap-warn" id="recapWarn" hidden>⚠️ <strong>Penyimpanan tidak tersedia di perangkat/mode ini</strong> (mis. file dibuka langsung tanpa alamat web, atau mode privat). Nilai hanya bertahan selama satu kali buka. Agar Nilai Gabungan terhitung utuh: kerjakan <strong>ketiga tipe dalam satu kali buka</strong> tanpa menutup atau memuat ulang halaman — atau buka aplikasi ini lewat <strong>alamat web</strong> (mis. GitHub Pages) agar nilai tersimpan otomatis.</div>
+      </div>
+
+      <div class="welcome-footer">
+        <span>Tekan tombol di atas untuk memulai sesi latihan</span>
+        <span>Setingkat OSN-K · <strong>level SMP</strong></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== HISTORY DASHBOARD SCREEN ===================== -->
+<section id="history" class="screen">
+  <div class="hist-wrap">
+    <div class="hist-head">
+      <h2 class="hist-title">📊 Dashboard Riwayat Latihan</h2>
+      <div class="hist-actions">
+        <button type="button" class="hist-btn primary" onclick="closeHistory()">← Kembali ke Beranda</button>
+        <button type="button" class="hist-btn danger" onclick="resetHistory()">Hapus Riwayat</button>
+      </div>
+    </div>
+    <p class="hist-sub">Semua hasil latihan tercatat otomatis di sini setiap kali sebuah tipe soal dikumpulkan — lengkap dengan versi, tipe soal, nilai, dan tanggalnya.</p>
+
+    <div class="hist-warn" id="histWarn" hidden></div>
+    <div id="histBody"></div>
+  </div>
+</section>
+
+<!-- ===================== EXAM SCREEN ===================== -->
+<section id="exam" class="screen">
+  <header class="exam-header">
+    <div class="header-inner">
+      <div class="header-left">
+        <div class="header-logo">Latihan <em>Matematika</em></div>
+        <span id="modeBadge" class="mode-badge">Pilihan Ganda</span>
+      </div>
+      <div id="timer" class="timer">
+        <div>
+          <div class="timer-label">Sisa Waktu</div>
+          <div class="timer-value" id="timerValue">30:00</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="exam-body">
+    <div class="question-section">
+      <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+      <div class="question-meta">
+        <div class="question-num">Soal <span id="currentNum">1</span> dari <span id="totalNum">30</span></div>
+        <div class="answered-count"><span id="answeredCount">0</span> dari <span id="totalCount">30</span> terjawab</div>
+      </div>
+
+      <div class="question-card">
+        <div class="question-text" id="questionText"></div>
+        <div id="answerArea"></div>
+      </div>
+
+      <div class="nav-controls">
+        <button class="btn btn-secondary" id="prevBtn" onclick="prevQuestion()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+          Sebelumnya
+        </button>
+        <button class="btn btn-primary" id="nextBtn" onclick="nextQuestion()">
+          Selanjutnya
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <aside class="sidebar">
+      <div class="sidebar-title">Navigasi Soal</div>
+      <div class="question-grid" id="questionGrid"></div>
+      <div class="legend">
+        <div class="legend-item"><div class="legend-box current"></div><span>Soal aktif</span></div>
+        <div class="legend-item"><div class="legend-box answered"></div><span>Sudah dijawab</span></div>
+        <div class="legend-item"><div class="legend-box"></div><span>Belum dijawab</span></div>
+      </div>
+      <button class="submit-btn" onclick="confirmSubmit()">Selesai &amp; Kumpulkan</button>
+    </aside>
+  </div>
+</section>
+
+<!-- ===================== RESULT SCREEN ===================== -->
+<section id="result" class="screen">
+  <div class="result-wrap">
+    <div class="result-card">
+      <div id="resultBanner" class="result-banner">
+        <div class="result-status-label" id="resultLabel">Hasil Sesi</div>
+        <div class="result-status" id="resultStatus">Lulus</div>
+        <div class="result-message" id="resultMessage"></div>
+      </div>
+      <div class="result-stats">
+        <div class="stat-block">
+          <div class="stat-label">Total Soal</div>
+          <div class="stat-value" id="statTotal">30</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-label">Benar</div>
+          <div class="stat-value correct" id="statCorrect">0</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-label">Salah</div>
+          <div class="stat-value wrong" id="statWrong">0</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-label">Tidak Dijawab</div>
+          <div class="stat-value" id="statSkipped">0</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-label">Nilai</div>
+          <div class="stat-value" id="statScore">0</div>
+        </div>
+      </div>
+      <div class="result-actions">
+        <button class="btn btn-secondary" onclick="showReview()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          Tinjau Jawaban
+        </button>
+        <button class="btn btn-primary" onclick="returnHome()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          Kembali ke Beranda
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== REVIEW SCREEN ===================== -->
+<section id="review" class="screen">
+  <div class="review-wrap">
+    <div class="review-header">
+      <h2 class="review-title">Tinjauan Jawaban</h2>
+      <button class="btn btn-secondary" onclick="backToResult()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+        Kembali ke Hasil
+      </button>
+    </div>
+    <div class="review-list" id="reviewList"></div>
+  </div>
+</section>
+
+<!-- ===================== PROJECT RESULT SCREEN ===================== -->
+<section id="projectResult" class="screen">
+  <div class="project-result-wrap">
+    <div class="pr-banner">
+      <div class="pr-label">Soal Uraian</div>
+      <div class="pr-title">Soal Uraian Selesai Dikerjakan!</div>
+      <div class="pr-msg">Jawabanmu dinilai per kriteria langkah (bukan kemiripan teks). Cara penulisan bebas — yang dinilai adalah munculnya langkah &amp; hasil yang diminta soal. Rincian penilaiannya bisa kamu lihat sendiri di bawah.</div>
+    </div>
+
+    <div class="pr-score" id="prScore">
+      <div class="prs-left">
+        <div class="prs-percent" id="prScorePercent">0%</div>
+        <div class="prs-caption">Nilai rata-rata<br>4 Soal Uraian</div>
+      </div>
+      <div class="prs-status" id="prScoreStatus">—</div>
+    </div>
+
+    <div class="pr-note">💡 Cara menghitung nilai: setiap kriteria berbobot sama. <strong>Nilai = (kriteria terpenuhi ÷ total kriteria) × 100%</strong>. Kamu boleh memakai nama, angka, dan kalimat sendiri — asal langkah yang diminta soal ada, kriterianya tetap dihitung terpenuhi.</div>
+
+    <div id="prProjects"></div>
+
+    <div class="result-actions">
+      <button class="btn btn-primary" onclick="returnHome()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        Kembali ke Beranda
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== MODAL ===================== -->
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <div class="modal-title" id="modalTitle">Kumpulkan Jawaban?</div>
+    <div class="modal-text" id="modalText">Setelah dikumpulkan, kamu tidak dapat mengubah jawaban.</div>
+    <div class="modal-actions">
+      <button class="btn btn-secondary" id="modalCancel" onclick="closeModal()">Batal</button>
+      <button class="btn btn-primary" id="modalConfirm" onclick="submitExam()">Ya, Kumpulkan</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   KONFIGURASI: Threshold kelulusan dalam persen.
+   Ubah angka ini saja kalau ingin mengganti batas kelulusan
+   — logika & tampilan akan otomatis menyesuaikan, jadi mau
+   total soal berapa pun (30, 60, 100, dst) tetap konsisten.
+   ============================================================ */
+const PASS_THRESHOLD_PCT = 60; // nilai default; bisa diubah lewat field "Batas Lulus"
+
+/* Membaca batas lulus dari field input (fleksibel), dgn validasi & fallback */
+function getPassThreshold() {
+  const f = document.getElementById('passThreshold');
+  let v = f ? parseInt(f.value, 10) : PASS_THRESHOLD_PCT;
+  if (isNaN(v) || v < 1) v = PASS_THRESHOLD_PCT;
+  if (v > 100) v = 100;
+  if (f) f.value = v; // rapikan tampilan ke nilai yang dipakai
+  return v;
+}
+
+/* ============================================================
+   NILAI GABUNGAN (OVERALL) — gabungan PG + Isian + Project
+   Skor tiap tipe direkam, lalu dirata-rata; lulus jika rata-rata
+   gabungan >= Batas Lulus. Disimpan di perangkat (localStorage)
+   dengan fallback ke memori bila penyimpanan tak tersedia.
+   ============================================================ */
+const SCORE_KEY = 'osnMtkScores_v1_KAB01';  // kunci khusus per-versi (cegah tumpang tindih antar versi)
+// Deteksi ketersediaan localStorage. Di sebagian lingkungan (file dibuka langsung via
+// file://, mode privat, atau sebagian browser HP) localStorage diblokir sehingga nilai
+// tak bisa disimpan antar-sesi. Dideteksi agar bisa memberi peringatan yang jelas.
+const STORAGE_OK = (function () {
+  try { localStorage.setItem('__pytest__', '1'); localStorage.removeItem('__pytest__'); return true; }
+  catch (e) { return false; }
+})();
+let scores = { mc: null, essay: null, project: null };
+try {
+  const raw = localStorage.getItem(SCORE_KEY);
+  if (raw) {
+    const o = JSON.parse(raw);
+    scores = {
+      mc: (typeof o.mc === 'number') ? o.mc : null,
+      essay: (typeof o.essay === 'number') ? o.essay : null,
+      project: (typeof o.project === 'number') ? o.project : null
+    };
+  }
+} catch (e) { /* abaikan; pakai memori */ }
+
+function persistScores() {
+  try { localStorage.setItem(SCORE_KEY, JSON.stringify(scores)); } catch (e) { /* tetap di memori */ }
+}
+
+function recordScore(mode, pct) {
+  if (mode === 'mc' || mode === 'essay' || mode === 'project') {
+    scores[mode] = pct;
+    persistScores();
+    pushHistory(mode, pct);   // rekam ke riwayat lintas versi (untuk Dashboard)
+  }
+}
+
+function resetScores() {
+  scores = { mc: null, essay: null, project: null };
+  persistScores();
+  renderRecap();
+}
+
+function fmtScore(v) {
+  return (v === null || v === undefined) ? '—' : Math.round(v) + '%';
+}
+
+function renderRecap() {
+  const mcEl = document.getElementById('recapMc');
+  if (!mcEl) return; // panel belum ada
+  mcEl.textContent = fmtScore(scores.mc);
+  document.getElementById('recapEssay').textContent = fmtScore(scores.essay);
+  document.getElementById('recapProject').textContent = fmtScore(scores.project);
+
+  const keys = ['mc', 'essay', 'project'];
+  const doneCount = keys.filter(k => scores[k] !== null && scores[k] !== undefined).length;
+
+  const box = document.getElementById('recapOverall');
+  const pctEl = document.getElementById('recapOverallPct');
+  const statusEl = document.getElementById('recapStatus');
+  box.classList.remove('pass', 'fail');
+
+  if (doneCount === 3) {
+    const avg = (scores.mc + scores.essay + scores.project) / 3;
+    const threshold = getPassThreshold();
+    const pass = avg >= threshold;
+    pctEl.textContent = avg.toFixed(1) + '%';
+    box.classList.add(pass ? 'pass' : 'fail');
+    statusEl.textContent = pass
+      ? `LULUS — nilai gabungan ${avg.toFixed(1)}% memenuhi batas lulus ${threshold}%`
+      : `BELUM LULUS — nilai gabungan ${avg.toFixed(1)}%, batas lulus ${threshold}%`;
+  } else {
+    pctEl.textContent = '—';
+    statusEl.textContent = `Selesaikan ketiga tipe latihan (${doneCount}/3 sudah dikerjakan) untuk melihat status kelulusan gabungan.`;
+  }
+
+  // Peringatan bila penyimpanan tidak tersedia (nilai tidak tersimpan antar-sesi)
+  const warn = document.getElementById('recapWarn');
+  if (warn) warn.hidden = STORAGE_OK;
+}
+
+/* SOAL PILIHAN GANDA (30) — lingkup 10 topik W3Schools (Arrays s/d String Formatting) */
+const MC_QUESTIONS = [
+  {"q": "(Bilangan) Perhatikan barisan semua bilangan bulat positif yang bukan kelipatan 4: 1, 2, 3, 5, 6, 7, 9, 10, 11, 13, … Suku ke-2025 barisan tersebut adalah ….", "o": ["2698", "2699", "2700", "2701"], "a": 1},
+  {"q": "(Bilangan) Dua bilangan bulat positif memiliki jumlah 60 dan KPK 72. FPB kedua bilangan tersebut adalah ….", "o": ["6", "8", "12", "24"], "a": 2},
+  {"q": "(Bilangan) Banyaknya pasangan terurut bilangan bulat positif (a, b) dengan FPB(a, b) = 6 dan KPK(a, b) = 90 adalah ….", "o": ["2", "3", "4", "6"], "a": 2},
+  {"q": "(Bilangan) Nilai dari 1 − 2 + 3 − 4 + 5 − … + 2025 adalah ….", "o": ["1012", "1013", "2025", "−1013"], "a": 1},
+  {"q": "(Bilangan) Banyaknya faktor positif dari 2025 adalah ….", "o": ["12", "13", "15", "16"], "a": 2},
+  {"q": "(Bilangan) Sisa pembagian 2025²⁰²⁵ oleh 7 adalah ….", "o": ["1", "2", "4", "6"], "a": 0},
+  {"q": "(Bilangan) Banyaknya pasangan terurut bilangan bulat (x, y) dengan −5 ≤ x ≤ 5 dan −5 ≤ y ≤ 5 yang memenuhi 12 ≤ x² + y² ≤ 25 adalah ….", "o": ["40", "44", "52", "60"], "a": 1},
+  {"q": "(Bilangan) Banyaknya bilangan prima p kurang dari 50 sehingga p + 6 juga bilangan prima adalah ….", "o": ["8", "9", "10", "11"], "a": 2},
+  {"q": "(Bilangan) Bilangan tiga angka terbesar yang habis dibagi 7 sekaligus habis dibagi 11 adalah ….", "o": ["847", "924", "968", "990"], "a": 1},
+  {"q": "(Bilangan) Dua angka terakhir (puluhan dan satuan) dari 3¹⁰⁰ adalah ….", "o": ["01", "03", "43", "81"], "a": 0},
+  {"q": "(Aritmatika) Sebuah jaket berharga Rp250.000 mendapat diskon 20%, kemudian dari harga setelah diskon diberi diskon lagi 10%. Harga yang harus dibayar adalah ….", "o": ["Rp175.000", "Rp180.000", "Rp185.000", "Rp195.000"], "a": 1},
+  {"q": "(Aritmatika) Perbandingan umur ayah dan anak 7 : 2. Jika selisih umur mereka 30 tahun, umur ayah adalah ….", "o": ["35 tahun", "42 tahun", "49 tahun", "56 tahun"], "a": 1},
+  {"q": "(Aritmatika) Dua kota berjarak 250 km. Dari kedua kota berangkat bersamaan dua mobil yang saling mendekat dengan kecepatan 60 km/jam dan 40 km/jam. Mereka berpapasan setelah ….", "o": ["2 jam", "2 jam 30 menit", "3 jam", "3 jam 30 menit"], "a": 1},
+  {"q": "(Aritmatika) Andi dapat menyelesaikan suatu pekerjaan dalam 6 hari, Budi dalam 12 hari. Jika dikerjakan bersama, pekerjaan selesai dalam ….", "o": ["3 hari", "4 hari", "5 hari", "9 hari"], "a": 1},
+  {"q": "(Aritmatika) Terdapat 40 liter larutan garam dengan kadar 30%. Agar kadarnya turun menjadi 20%, banyak air yang harus ditambahkan adalah ….", "o": ["10 liter", "15 liter", "20 liter", "25 liter"], "a": 2},
+  {"q": "(Aritmatika) Suatu barisan aritmetika memiliki suku ke-3 = 13 dan suku ke-7 = 29. Suku ke-20 barisan tersebut adalah ….", "o": ["77", "81", "85", "89"], "a": 1},
+  {"q": "(Aritmatika) Seorang pedagang membeli barang Rp80.000 dan menjualnya Rp100.000. Persentase keuntungannya adalah ….", "o": ["20%", "25%", "30%", "80%"], "a": 1},
+  {"q": "(Aritmatika) Rata-rata 5 bilangan adalah 14. Setelah satu bilangan dihapus, rata-rata 4 bilangan sisanya menjadi 15. Bilangan yang dihapus adalah ….", "o": ["8", "10", "12", "14"], "a": 1},
+  {"q": "(Aritmatika) Tiga bilangan berbanding 2 : 3 : 5 dan jumlahnya 120. Bilangan terbesar adalah ….", "o": ["24", "36", "60", "72"], "a": 2},
+  {"q": "(Aritmatika) Jumlah deret 3 + 7 + 11 + 15 + … + 99 adalah ….", "o": ["1.225", "1.250", "1.275", "1.300"], "a": 2},
+  {"q": "(Geometri) Sebuah jajargenjang memiliki alas 18 cm dan tinggi 7 cm. Luasnya adalah ….", "o": ["25 cm²", "50 cm²", "126 cm²", "252 cm²"], "a": 2},
+  {"q": "(Geometri) Sebuah segitiga memiliki panjang sisi 13 cm, 14 cm, dan 15 cm. Luas segitiga tersebut adalah ….", "o": ["80 cm²", "84 cm²", "90 cm²", "96 cm²"], "a": 1},
+  {"q": "(Geometri) Keliling lingkaran dengan jari-jari 14 cm (π = 22/7) adalah ….", "o": ["44 cm", "66 cm", "88 cm", "154 cm"], "a": 2},
+  {"q": "(Geometri) Trapesium memiliki panjang sisi sejajar 8 cm dan 14 cm serta tinggi 6 cm. Luasnya adalah ….", "o": ["44 cm²", "60 cm²", "66 cm²", "132 cm²"], "a": 2},
+  {"q": "(Geometri) Volume kubus dengan panjang rusuk 7 cm adalah ….", "o": ["294 cm³", "343 cm³", "392 cm³", "441 cm³"], "a": 1},
+  {"q": "(Geometri) Sebuah limas dengan alas persegi 10 cm × 10 cm dan tinggi 12 cm memiliki volume ….", "o": ["300 cm³", "400 cm³", "500 cm³", "1.200 cm³"], "a": 1},
+  {"q": "(Geometri) Besar satu sudut dalam segi dua belas beraturan adalah ….", "o": ["144°", "150°", "156°", "160°"], "a": 1},
+  {"q": "(Geometri) Sebuah persegi dengan sisi 10 cm memuat tepat satu lingkaran yang menyinggung keempat sisinya. Luas daerah di dalam persegi tetapi di luar lingkaran (π = 3,14) adalah ….", "o": ["18,5 cm²", "21,5 cm²", "25 cm²", "78,5 cm²"], "a": 1},
+  {"q": "(Geometri) Dua segitiga sebangun memiliki perbandingan sisi 3 : 5. Jika luas segitiga kecil 27 cm², luas segitiga besar adalah ….", "o": ["45 cm²", "75 cm²", "81 cm²", "125 cm²"], "a": 1},
+  {"q": "(Geometri) Sebuah belah ketupat memiliki panjang diagonal 16 cm dan 30 cm. Keliling belah ketupat tersebut adalah ….", "o": ["60 cm", "64 cm", "68 cm", "92 cm"], "a": 2},
+  {"q": "(Statistika & Pengukuran) Rata-rata dari data 7, 9, 10, 6, 8 adalah ….", "o": ["7", "8", "9", "10"], "a": 1},
+  {"q": "(Statistika & Pengukuran) Median dari data 4, 8, 6, 10, 15, 2, 9 adalah ….", "o": ["6", "8", "9", "10"], "a": 1},
+  {"q": "(Statistika & Pengukuran) Modus dari data 3, 5, 3, 7, 5, 3, 8, 5, 3 adalah ….", "o": ["3", "5", "7", "8"], "a": 0},
+  {"q": "(Statistika & Pengukuran) Nilai rata-rata 20 siswa adalah 75 dan rata-rata 30 siswa lainnya adalah 80. Rata-rata gabungan 50 siswa adalah ….", "o": ["77", "77,5", "78", "78,5"], "a": 2},
+  {"q": "(Statistika & Pengukuran) Rata-rata 10 bilangan adalah 62. Jika satu bilangan bernilai 80 dihapus, rata-rata 9 bilangan sisanya adalah ….", "o": ["58", "60", "61", "62"], "a": 1},
+  {"q": "(Statistika & Pengukuran) Jangkauan (range) dari data 12, 7, 20, 5, 18, 9 adalah ….", "o": ["13", "15", "18", "20"], "a": 1},
+  {"q": "(Statistika & Pengukuran) Jarak tempuh perjalanan adalah 2,5 km ditambah 350 m. Total jarak dalam meter adalah ….", "o": ["2.750 m", "2.850 m", "2.950 m", "3.850 m"], "a": 1},
+  {"q": "(Statistika & Pengukuran) Sebuah mobil menempuh 180 km dalam waktu 2 jam 30 menit. Kecepatan rata-ratanya adalah ….", "o": ["60 km/jam", "72 km/jam", "75 km/jam", "90 km/jam"], "a": 1},
+  {"q": "(Statistika & Pengukuran) Dari 120 siswa: 60 ikut futsal, 50 ikut basket, 40 ikut voli; 20 ikut futsal & basket, 15 ikut basket & voli, 10 ikut futsal & voli, dan 5 ikut ketiganya. Banyak siswa yang tidak mengikuti satu pun kegiatan adalah ….", "o": ["5", "10", "15", "20"], "a": 1},
+  {"q": "(Statistika & Pengukuran) Median dari data nilai 6, 7, 7, 8, 5, 9, 7, 8 adalah ….", "o": ["6,5", "7", "7,5", "8"], "a": 1},
+  {"q": "(Kombinatorika) Banyaknya susunan berbeda dari semua huruf pada kata 'PRISMA' (semua huruf berbeda) adalah ….", "o": ["120", "360", "720", "5.040"], "a": 2},
+  {"q": "(Kombinatorika) Dari 8 siswa akan dipilih 3 siswa sebagai pengurus tanpa membedakan jabatan. Banyak cara memilih adalah ….", "o": ["24", "56", "112", "336"], "a": 1},
+  {"q": "(Kombinatorika) Dua dadu dilempar bersamaan. Peluang jumlah kedua mata dadu sama dengan 8 adalah ….", "o": ["1/9", "5/36", "1/6", "7/36"], "a": 1},
+  {"q": "(Kombinatorika) Seekor objek bergerak dari titik (0,0) ke titik (4,3) dengan hanya melangkah ke kanan atau ke atas sepanjang garis kisi. Banyak lintasan berbeda adalah ….", "o": ["21", "35", "42", "70"], "a": 1},
+  {"q": "(Kombinatorika) Suatu plat terdiri atas 2 huruf (A&ndash;Z) diikuti 3 angka (0&ndash;9); huruf dan angka boleh berulang. Banyak plat yang mungkin adalah ….", "o": ["67.600", "135.200", "676.000", "1.757.600"], "a": 2},
+  {"q": "(Kombinatorika) Banyaknya susunan berbeda dari semua huruf pada kata 'BANANA' adalah ….", "o": ["60", "120", "360", "720"], "a": 0},
+  {"q": "(Kombinatorika) Dari 4 pria dan 3 wanita akan dibentuk komite 3 orang dengan syarat minimal 1 wanita. Banyak komite yang mungkin adalah ….", "o": ["20", "31", "34", "35"], "a": 1},
+  {"q": "(Kombinatorika) Seekor objek bergerak dari (0,0) ke (3,3). Pada setiap langkah ia boleh ke kanan (x+1, y), ke atas (x, y+1), atau diagonal (x+1, y+1). Banyak lintasan berbeda adalah ….", "o": ["48", "56", "63", "70"], "a": 2},
+  {"q": "(Kombinatorika) Tiga keping uang logam dilempar bersamaan. Peluang muncul tepat 2 sisi gambar adalah ….", "o": ["1/4", "3/8", "1/2", "5/8"], "a": 1},
+  {"q": "(Kombinatorika) Lima orang akan duduk mengelilingi satu meja bundar. Banyak susunan duduk yang berbeda adalah ….", "o": ["24", "60", "120", "720"], "a": 0}
+];
+
+/* SOAL ISIAN SINGKAT (25) — lingkup 10 topik W3Schools (Arrays s/d String Formatting) */
+const ESSAY_QUESTIONS = [
+  {"q": "FPB (Faktor Persekutuan Terbesar) dari 48 dan 60 adalah …", "a": "12"},
+  {"q": "KPK (Kelipatan Persekutuan Terkecil) dari 12 dan 18 adalah …", "a": "36"},
+  {"q": "Banyaknya faktor positif dari 36 adalah …", "a": "9"},
+  {"q": "Jumlah bilangan 1 + 2 + 3 + … + 50 adalah …", "a": "1275"},
+  {"q": "Nilai dari 2⁵ (dua pangkat lima) adalah …", "a": "32"},
+  {"q": "Nilai dari √196 adalah …", "a": "14"},
+  {"q": "15% dari 240 adalah …", "a": "36"},
+  {"q": "Rata-rata dari data 4, 6, 8, 10, 12 adalah …", "a": "8"},
+  {"q": "Median dari data 3, 7, 2, 9, 5 adalah …", "a": "5"},
+  {"q": "Suku ke-10 dari barisan aritmetika 3, 7, 11, 15, … adalah …", "a": "39"},
+  {"q": "Keliling persegi yang panjang sisinya 13 cm adalah … cm", "a": "52"},
+  {"q": "Luas lingkaran berjari-jari 7 cm (π = 22/7) adalah … cm²", "a": "154"},
+  {"q": "Volume kubus dengan rusuk 5 cm adalah … cm³", "a": "125"},
+  {"q": "Sebuah barang seharga Rp60.000 didiskon 25%. Harga yang dibayar adalah Rp…", "a": "45000"},
+  {"q": "Banyaknya diagonal pada segi enam (heksagon) adalah …", "a": "9"},
+  {"q": "Nilai dari 7! ÷ 5! adalah …", "a": "42"},
+  {"q": "Nilai dari C(6, 2) (kombinasi 6 pilih 2) adalah …", "a": "15"},
+  {"q": "Pada pelemparan dua dadu, banyaknya cara agar jumlah mata dadu = 7 adalah …", "a": "6"},
+  {"q": "Modus dari data 2, 3, 3, 4, 3, 5 adalah …", "a": "3"},
+  {"q": "Jangkauan dari data 14, 9, 21, 6 adalah …", "a": "15"},
+  {"q": "3,25 jam sama dengan … menit", "a": "195"},
+  {"q": "2 lusin sama dengan … buah", "a": "24"},
+  {"q": "Sisa pembagian 100 oleh 7 adalah …", "a": "2"},
+  {"q": "Banyaknya bilangan prima antara 20 dan 30 adalah …", "a": "2"},
+  {"q": "Besar jumlah ketiga sudut dalam sebuah segitiga adalah … derajat", "a": "180"}
+];
+
+/* ESSAY PROJECT (4) — tiap proyek punya kriteria penilaiannya sendiri */
+const PROJECT_QUESTIONS = [
+  {"q": "📐 SOAL URAIAN 1 dari 4 — Barisan & Deret Aritmetika\n\nDiketahui suatu barisan aritmetika dengan suku ke-3 = 13 dan suku ke-7 = 29.\nTuliskan langkah penyelesaian beserta hasilnya untuk:\n(a) Tentukan beda (b) barisan tersebut.\n(b) Tentukan suku pertama (a).\n(c) Tentukan suku ke-20 (U20).\n(d) Tentukan jumlah 20 suku pertama (S20).\n\nTulis cara dan hasil akhirnya. Yang dinilai adalah munculnya langkah & hasil yang diminta.", "solution": "Diketahui U3 = 13 dan U7 = 29 (barisan aritmetika).\n\n(a) Beda: b = (U7 − U3)/(7 − 3) = (29 − 13)/4 = 16/4 = 4\n(b) Suku pertama: a = U3 − 2b = 13 − 2(4) = 5\n(c) Suku ke-20: U20 = a + 19b = 5 + 19(4) = 5 + 76 = 81\n(d) Jumlah 20 suku: S20 = (20/2)(2a + 19b) = 10(10 + 76) = 10 × 86 = 860", "checks": [{"label": "Menyebut jenis barisan (aritmetika)", "res": ["aritm"], "hint": "barisan aritmetika"}, {"label": "Menentukan beda b = 4", "res": ["b\\s*=\\s*4|beda\\D{0,8}4|=\\s*4\\b"], "hint": "b = (29−13)/4 = 4"}, {"label": "Menentukan suku pertama a = 5", "res": ["a\\s*=\\s*5|pertama\\D{0,8}5|=\\s*5\\b"], "hint": "a = 13 − 2·4 = 5"}, {"label": "Menuliskan rumus Un atau Sn", "res": ["a\\s*\\+\\s*1?9?\\s*b|2a|n\\s*/\\s*2|U\\s*=|S\\s*="], "hint": "Un = a + (n−1)b"}, {"label": "Suku ke-20 = 81", "res": ["\\b81\\b"], "hint": "U20 = 5 + 19·4 = 81"}, {"label": "Menyebut suku ke-20 (U20)", "res": ["20"], "hint": "U20 / suku ke-20"}, {"label": "Jumlah 20 suku (S20) = 860", "res": ["\\b860\\b"], "hint": "S20 = 10·86 = 860"}, {"label": "Menampilkan langkah perhitungan (tanda =)", "res": ["="], "hint": "tuliskan langkahnya"}], "rubric": ["Menyebut jenis barisan (aritmetika)", "Menentukan beda b = 4", "Menentukan suku pertama a = 5", "Menuliskan rumus Un atau Sn", "Suku ke-20 = 81", "Menyebut suku ke-20 (U20)", "Jumlah 20 suku (S20) = 860", "Menampilkan langkah perhitungan (tanda =)"]},
+  {"q": "📐 SOAL URAIAN 2 dari 4 — Teorema Pythagoras & Bangun Datar\n\nSebuah segitiga siku-siku memiliki dua sisi tegak lurus sepanjang 6 cm dan 8 cm.\nTuliskan langkah penyelesaian beserta hasilnya untuk:\n(a) Hitung panjang sisi miring (hipotenusa).\n(b) Hitung keliling segitiga.\n(c) Hitung luas segitiga.\n(d) Jika sisi miring dijadikan diameter sebuah lingkaran, tentukan jari-jari lingkaran itu.\n\nTulis cara dan hasil akhirnya.", "solution": "Diketahui sisi tegak 6 cm dan 8 cm, siku-siku.\n\n(a) Sisi miring (Pythagoras): c = √(6² + 8²) = √(36 + 64) = √100 = 10 cm\n(b) Keliling = 6 + 8 + 10 = 24 cm\n(c) Luas = ½ × alas × tinggi = ½ × 6 × 8 = 24 cm²\n(d) Diameter = 10 cm, maka jari-jari = 10 ÷ 2 = 5 cm", "checks": [{"label": "Memakai Teorema Pythagoras", "res": ["pythagoras|√|akar|sqrt|6.?²|36\\s*\\+\\s*64"], "hint": "c = √(6² + 8²)"}, {"label": "Perhitungan 36 + 64 = 100", "res": ["100|36\\s*\\+\\s*64"], "hint": "36 + 64 = 100"}, {"label": "Sisi miring = 10", "res": ["\\b10\\b"], "hint": "√100 = 10"}, {"label": "Keliling = 24", "res": ["\\b24\\b"], "hint": "6 + 8 + 10 = 24"}, {"label": "Menyebut keliling", "res": ["keliling"], "hint": "keliling segitiga"}, {"label": "Menyebut/menghitung luas", "res": ["luas"], "hint": "½ × 6 × 8 = 24"}, {"label": "Jari-jari = 5", "res": ["\\b5\\b"], "hint": "10 ÷ 2 = 5"}, {"label": "Menampilkan langkah perhitungan (tanda =)", "res": ["="], "hint": "tuliskan langkahnya"}], "rubric": ["Memakai Teorema Pythagoras", "Perhitungan 36 + 64 = 100", "Sisi miring = 10", "Keliling = 24", "Menyebut keliling", "Menyebut/menghitung luas", "Jari-jari = 5", "Menampilkan langkah perhitungan (tanda =)"]},
+  {"q": "📐 SOAL URAIAN 3 dari 4 — Statistika Data Tunggal\n\nDiberikan data nilai ulangan 10 siswa: 7, 8, 6, 9, 7, 10, 6, 7, 8, 9.\nTuliskan langkah penyelesaian beserta hasilnya untuk:\n(a) Hitung rata-rata (mean).\n(b) Hitung median.\n(c) Tentukan modus.\n(d) Tentukan jangkauan (range).\n\nTulis cara dan hasil akhirnya.", "solution": "Data: 7, 8, 6, 9, 7, 10, 6, 7, 8, 9 (n = 10). Urut: 6, 6, 7, 7, 7, 8, 8, 9, 9, 10.\n\n(a) Rata-rata = jumlah/n = 77/10 = 7,7\n(b) Median = rata-rata data ke-5 dan ke-6 = (7 + 8)/2 = 7,5\n(c) Modus = 7 (muncul 3 kali, terbanyak)\n(d) Jangkauan = data terbesar − terkecil = 10 − 6 = 4", "checks": [{"label": "Rata-rata = 7,7", "res": ["7[.,]7"], "hint": "77/10 = 7,7"}, {"label": "Menghitung jumlah data = 77", "res": ["\\b77\\b"], "hint": "jumlah = 77"}, {"label": "Median = 7,5", "res": ["7[.,]5"], "hint": "(7 + 8)/2 = 7,5"}, {"label": "Menyebut median", "res": ["median"], "hint": "median"}, {"label": "Modus = 7", "res": ["modus\\D{0,8}7|7\\s*\\(.*kali"], "hint": "modus = 7"}, {"label": "Menyebut modus", "res": ["modus"], "hint": "modus"}, {"label": "Jangkauan = 4", "res": ["jangkauan\\D{0,8}4|10\\s*−?-?\\s*6|\\b4\\b"], "hint": "10 − 6 = 4"}, {"label": "Menyebut rata-rata & jangkauan", "res": ["rata"], "hint": "rata-rata / jangkauan"}], "rubric": ["Rata-rata = 7,7", "Menghitung jumlah data = 77", "Median = 7,5", "Menyebut median", "Modus = 7", "Menyebut modus", "Jangkauan = 4", "Menyebut rata-rata & jangkauan"]},
+  {"q": "📐 SOAL URAIAN 4 dari 4 — Kombinatorika & Peluang\n\nDari angka 1, 2, 3, 4, 5 akan disusun bilangan tiga angka dengan angka-angka yang BERBEDA (tidak boleh berulang).\nTuliskan langkah penyelesaian beserta hasilnya untuk:\n(a) Berapa banyak bilangan tiga angka yang dapat dibentuk?\n(b) Berapa banyak di antaranya yang bernilai ganjil?\n(c) Berapa banyak yang bernilai genap?\n(d) Jika satu bilangan dipilih acak, berapa peluang terpilih bilangan genap? (tulis dalam bentuk pecahan paling sederhana)\n\nTulis cara dan hasil akhirnya.", "solution": "Angka tersedia: 1, 2, 3, 4, 5 (tanpa pengulangan).\n\n(a) Banyak bilangan = 5 × 4 × 3 = 60\n(b) Ganjil → angka satuan ∈ {1,3,5} (3 pilihan), dua angka depan = 4 × 3 = 12. Jadi 3 × 12 = 36\n(c) Genap → angka satuan ∈ {2,4} (2 pilihan), dua angka depan = 4 × 3 = 12. Jadi 2 × 12 = 24\n(d) Peluang genap = 24/60 = 2/5", "checks": [{"label": "Total bilangan = 60 (5×4×3)", "res": ["\\b60\\b"], "hint": "5 × 4 × 3 = 60"}, {"label": "Menuliskan aturan perkalian 5×4×3", "res": ["5\\s*[x×*·]\\s*4\\s*[x×*·]\\s*3"], "hint": "5 × 4 × 3"}, {"label": "Banyak bilangan ganjil = 36", "res": ["\\b36\\b"], "hint": "3 × 12 = 36"}, {"label": "Menyebut ganjil", "res": ["ganjil"], "hint": "bilangan ganjil"}, {"label": "Banyak bilangan genap = 24", "res": ["\\b24\\b"], "hint": "2 × 12 = 24"}, {"label": "Menyebut genap", "res": ["genap"], "hint": "bilangan genap"}, {"label": "Peluang genap = 2/5", "res": ["2\\s*/\\s*5"], "hint": "24/60 = 2/5"}, {"label": "Menyebut peluang", "res": ["peluang"], "hint": "peluang"}], "rubric": ["Total bilangan = 60 (5×4×3)", "Menuliskan aturan perkalian 5×4×3", "Banyak bilangan ganjil = 36", "Menyebut ganjil", "Banyak bilangan genap = 24", "Menyebut genap", "Peluang genap = 2/5", "Menyebut peluang"]}
+];
+
+/* Agar kode lama tetap jalan, kode merujuk PROJECT_CHECKS (kriteria proyek pertama) */
+const PROJECT_CHECKS = PROJECT_QUESTIONS[0].checks;
+
+/* ============================================================
+   STATE
+   ============================================================ */
+let state = {
+  mode: null,            // 'mc' | 'essay' | 'project'
+  questions: [],         // active question set
+  answers: [],           // user's answers (index for mc, string for essay)
+  current: 0,
+  timeLeft: 0,           // in seconds
+  timerInterval: null,
+  finished: false
+};
+
+/* ============================================================
+   SCREEN MANAGEMENT
+   ============================================================ */
+/* ============================================================
+   RIWAYAT & DASHBOARD (lintas versi)
+   Riwayat disimpan pada SATU kunci bersama (bukan per-versi), sehingga
+   dashboard dapat menampilkan capaian dari seluruh versi latihan selama
+   file-file tersebut dibuka dari alamat web yang sama (mis. GitHub Pages).
+   Bagian ini murni tambahan; tidak mengubah fitur yang sudah ada.
+   ============================================================ */
+const HISTORY_KEY = 'osnMtkHistory_v1';
+const APP_VERSION = SCORE_KEY.split('_').pop();   // label versi diambil dari kunci skor
+const MODE_LABEL = { mc: 'Pilihan Ganda', essay: 'Isian Singkat', project: 'Soal Uraian' };
+const MODE_COLOR = { mc: '#3b9fe0', essay: '#e07b3c', project: '#22c55e' };
+const MODE_ORDER = ['mc', 'essay', 'project'];
+
+function loadHistory() {
+  try {
+    const raw = localStorage.getItem(HISTORY_KEY);
+    if (!raw) return [];
+    const arr = JSON.parse(raw);
+    if (!Array.isArray(arr)) return [];
+    return arr.filter(r => r && typeof r.s === 'number' && typeof r.v === 'string' && MODE_LABEL[r.m]);
+  } catch (e) { return []; }
+}
+
+let historyMem = loadHistory();   // cadangan di memori bila penyimpanan diblokir
+
+function getHistory() { return STORAGE_OK ? loadHistory() : historyMem; }
+
+function pushHistory(mode, pct) {
+  const rec = {
+    v: APP_VERSION,
+    m: mode,
+    s: Math.round(pct),
+    p: getPassThreshold(),
+    t: Date.now()
+  };
+  historyMem = getHistory();
+  historyMem.push(rec);
+  if (historyMem.length > 800) historyMem = historyMem.slice(-800);
+  try { localStorage.setItem(HISTORY_KEY, JSON.stringify(historyMem)); } catch (e) { /* tetap di memori */ }
+}
+
+function resetHistory() {
+  const n = getHistory().length;
+  if (!n) { alert('Riwayat masih kosong.'); return; }
+  if (!confirm('Hapus SELURUH riwayat latihan (' + n + ' catatan) dari semua versi?\n\nTindakan ini tidak bisa dibatalkan.')) return;
+  historyMem = [];
+  try { localStorage.removeItem(HISTORY_KEY); } catch (e) { /* abaikan */ }
+  renderHistory();
+}
+
+function openHistory() { renderHistory(); showScreen('history'); }
+function closeHistory() { returnHome(); }
+
+function fmtDate(ts) {
+  try {
+    const d = new Date(ts);
+    const tgl = d.toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric' });
+    const jam = d.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
+    return tgl + ' · ' + jam;
+  } catch (e) { return '-'; }
+}
+
+/* Grafik batang berkelompok (SVG murni, tanpa pustaka luar).
+   Tiap versi menampilkan 3 batang: PG, Isian Singkat, Essay Project.
+   Nilai yang ditampilkan = hasil TERBARU untuk tiap tipe di versi tersebut. */
+function buildHistoryChart(latest) {
+  const vers = Object.keys(latest).sort();
+  if (!vers.length) return '';
+  const padL = 44, padR = 14, padT = 18, padB = 44;
+  const groupW = 86, barW = 20, gap = 7, plotH = 210;
+  const w = padL + padR + vers.length * groupW;
+  const h = padT + plotH + padB;
+  let s = '<svg viewBox="0 0 ' + w + ' ' + h + '" width="' + w + '" height="' + h +
+          '" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Grafik nilai tiap tipe soal per versi latihan">';
+  [0, 25, 50, 75, 100].forEach(function (val) {
+    const y = padT + plotH - (val / 100) * plotH;
+    s += '<line x1="' + padL + '" y1="' + y + '" x2="' + (w - padR) + '" y2="' + y +
+         '" stroke="#334155" stroke-width="1"/>';
+    s += '<text x="' + (padL - 9) + '" y="' + (y + 4) + '" text-anchor="end" font-size="10" fill="#9fb0c3" ' +
+         'font-family="Manrope, sans-serif">' + val + '</text>';
+  });
+  vers.forEach(function (v, gi) {
+    const gx = padL + gi * groupW;
+    const startX = gx + (groupW - (3 * barW + 2 * gap)) / 2;
+    MODE_ORDER.forEach(function (m, mi) {
+      const val = latest[v][m];
+      const x = startX + mi * (barW + gap);
+      if (typeof val === 'number') {
+        const bh = Math.max(3, (val / 100) * plotH);
+        const y = padT + plotH - bh;
+        s += '<rect x="' + x + '" y="' + y + '" width="' + barW + '" height="' + bh + '" rx="3" fill="' +
+             MODE_COLOR[m] + '"><title>Versi ' + v + ' — ' + MODE_LABEL[m] + ': ' + val + '%</title></rect>';
+        s += '<text x="' + (x + barW / 2) + '" y="' + (y - 5) + '" text-anchor="middle" font-size="9" ' +
+             'fill="#c7d2e0" font-family="Manrope, sans-serif">' + val + '</text>';
+      } else {
+        s += '<rect x="' + x + '" y="' + (padT + plotH - 3) + '" width="' + barW + '" height="3" rx="1.5" ' +
+             'fill="#334155"><title>Versi ' + v + ' — ' + MODE_LABEL[m] + ': belum dikerjakan</title></rect>';
+      }
+    });
+    s += '<text x="' + (gx + groupW / 2) + '" y="' + (padT + plotH + 20) + '" text-anchor="middle" ' +
+         'font-size="12" font-weight="700" fill="#e8edf4" font-family="Manrope, sans-serif">Versi ' + v + '</text>';
+  });
+  s += '<line x1="' + padL + '" y1="' + (padT + plotH) + '" x2="' + (w - padR) + '" y2="' + (padT + plotH) +
+       '" stroke="#475569" stroke-width="1.5"/>';
+  s += '</svg>';
+  return s;
+}
+
+function renderHistory() {
+  const warn = document.getElementById('histWarn');
+  const body = document.getElementById('histBody');
+  if (!body) return;
+
+  if (warn) {
+    if (!STORAGE_OK) {
+      warn.hidden = false;
+      warn.innerHTML = '⚠️ <strong>Penyimpanan tidak tersedia di perangkat/mode ini.</strong> ' +
+        'Riwayat hanya bertahan selama halaman ini dibuka. Agar riwayat tersimpan permanen dan ' +
+        'tergabung antar versi, buka aplikasi lewat <strong>alamat web</strong> (mis. GitHub Pages).';
+    } else {
+      warn.hidden = true;
+    }
+  }
+
+  const list = getHistory().slice().sort(function (a, b) { return a.t - b.t; });
+
+  if (!list.length) {
+    body.innerHTML = '<div class="hist-panel"><div class="hist-empty">Belum ada riwayat.<br>' +
+      'Selesaikan salah satu tipe soal (Pilihan Ganda, Isian Singkat, atau Essay Project), ' +
+      'maka hasilnya otomatis tercatat di sini.</div></div>';
+    return;
+  }
+
+  // Hasil TERBARU tiap tipe untuk tiap versi (list sudah urut waktu naik)
+  const latest = {};
+  list.forEach(function (r) {
+    if (!latest[r.v]) latest[r.v] = {};
+    latest[r.v][r.m] = r.s;              // catatan lebih baru menimpa yang lama
+    latest[r.v]['_t_' + r.m] = r.t;
+  });
+
+  const allScores = list.map(function (r) { return r.s; });
+  const avgAll = Math.round(allScores.reduce(function (a, b) { return a + b; }, 0) / allScores.length);
+  const best = Math.max.apply(null, allScores);
+  const versCount = Object.keys(latest).length;
+  const passCount = list.filter(function (r) { return r.s >= (typeof r.p === 'number' ? r.p : 60); }).length;
+
+  let html = '';
+
+  // --- Kartu ringkasan ---
+  html += '<div class="hist-cards">' +
+    '<div class="hist-card"><div class="hc-label">Total Latihan</div><div class="hc-value">' + list.length +
+      '</div><div class="hc-note">' + passCount + ' kali lulus</div></div>' +
+    '<div class="hist-card"><div class="hc-label">Versi Dikerjakan</div><div class="hc-value">' + versCount +
+      '</div><div class="hc-note">' + Object.keys(latest).sort().join(', ') + '</div></div>' +
+    '<div class="hist-card"><div class="hc-label">Rata-rata Nilai</div><div class="hc-value">' + avgAll +
+      '%</div><div class="hc-note">dari seluruh latihan</div></div>' +
+    '<div class="hist-card"><div class="hc-label">Nilai Terbaik</div><div class="hc-value">' + best +
+      '%</div><div class="hc-note">pencapaian tertinggi</div></div>' +
+  '</div>';
+
+  // --- Grafik ---
+  html += '<div class="hist-panel">' +
+    '<h3>Grafik Nilai per Versi Latihan</h3>' +
+    '<p class="hp-note">Tiap versi menampilkan tiga batang sesuai tipe soal. Nilai yang ditampilkan adalah hasil terbaru. Batang tipis abu-abu berarti tipe tersebut belum dikerjakan.</p>' +
+    '<div class="hist-legend">' +
+      MODE_ORDER.map(function (m) {
+        return '<span class="hl-item"><span class="hl-dot" style="background:' + MODE_COLOR[m] + '"></span>' +
+               MODE_LABEL[m] + '</span>';
+      }).join('') +
+    '</div>' +
+    '<div class="hist-chart">' + buildHistoryChart(latest) + '</div>' +
+  '</div>';
+
+  // --- Tabel ringkasan per versi ---
+  const versSorted = Object.keys(latest).sort();
+  html += '<div class="hist-panel">' +
+    '<h3>Hasil Tiap Tipe Soal per Versi</h3>' +
+    '<p class="hp-note">Ringkasan nilai terbaru untuk setiap tipe soal, beserta rata-rata gabungannya.</p>' +
+    '<div class="hist-table-wrap"><table class="hist-table"><thead><tr>' +
+      '<th>Versi</th><th>Pilihan Ganda</th><th>Isian Singkat</th><th>Essay Project</th><th>Rata-rata</th>' +
+    '</tr></thead><tbody>';
+  versSorted.forEach(function (v) {
+    const row = latest[v];
+    const vals = MODE_ORDER.map(function (m) { return row[m]; }).filter(function (x) { return typeof x === 'number'; });
+    const avg = vals.length ? Math.round(vals.reduce(function (a, b) { return a + b; }, 0) / vals.length) : null;
+    html += '<tr><td><span class="pill ver">' + escapeHtml(v) + '</span></td>' +
+      MODE_ORDER.map(function (m) {
+        return '<td class="num">' + (typeof row[m] === 'number' ? row[m] + '%' : '—') + '</td>';
+      }).join('') +
+      '<td class="num"><strong>' + (avg === null ? '—' : avg + '%') + '</strong>' +
+      (vals.length < 3 ? ' <span class="hc-note">(' + vals.length + '/3 tipe)</span>' : '') + '</td></tr>';
+  });
+  html += '</tbody></table></div></div>';
+
+  // --- Log riwayat lengkap (terbaru di atas) ---
+  html += '<div class="hist-panel">' +
+    '<h3>Catatan Lengkap (' + list.length + ')</h3>' +
+    '<p class="hp-note">Seluruh pengerjaan, terbaru di urutan atas. Status mengikuti Batas Lulus yang berlaku saat itu.</p>' +
+    '<div class="hist-table-wrap"><table class="hist-table"><thead><tr>' +
+      '<th>Tanggal</th><th>Versi</th><th>Tipe Soal</th><th>Nilai</th><th>Status</th>' +
+    '</tr></thead><tbody>';
+  list.slice().reverse().forEach(function (r) {
+    const thr = (typeof r.p === 'number') ? r.p : 60;
+    const ok = r.s >= thr;
+    html += '<tr>' +
+      '<td>' + escapeHtml(fmtDate(r.t)) + '</td>' +
+      '<td><span class="pill ver">' + escapeHtml(r.v) + '</span></td>' +
+      '<td>' + escapeHtml(MODE_LABEL[r.m]) + '</td>' +
+      '<td class="num">' + r.s + '%</td>' +
+      '<td><span class="pill ' + (ok ? 'pass' : 'fail') + '">' + (ok ? 'LULUS' : 'BELUM') +
+        '</span> <span class="hc-note">batas ' + thr + '%</span></td>' +
+    '</tr>';
+  });
+  html += '</tbody></table></div></div>';
+
+  body.innerHTML = html;
+}
+
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+/* ============================================================
+   START EXAM
+   ============================================================ */
+function startExam(mode) {
+  state.mode = mode;
+  state.questions = mode === 'mc' ? MC_QUESTIONS : (mode === 'essay' ? ESSAY_QUESTIONS : PROJECT_QUESTIONS);
+  state.answers = new Array(state.questions.length).fill(null);
+  state.current = 0;
+  // Durasi dibaca dari field input yang bisa diatur sendiri; ada batas & nilai default
+  const defaultMinutes = { mc: 30, essay: 30, project: 35 };
+  const timeField = document.getElementById('time-' + mode);
+  let minutes = timeField ? parseInt(timeField.value, 10) : defaultMinutes[mode];
+  if (isNaN(minutes) || minutes < 1) minutes = defaultMinutes[mode];
+  if (minutes > 180) minutes = 180;
+  if (timeField) timeField.value = minutes; // tampilkan nilai yang dipakai (setelah dirapikan)
+  state.timeLeft = minutes * 60;
+  state.finished = false;
+
+  document.body.classList.remove('mode-mc', 'mode-essay', 'mode-project');
+  document.body.classList.add('mode-' + mode);
+
+  const badge = document.getElementById('modeBadge');
+  badge.textContent = mode === 'mc' ? 'Pilihan Ganda' : (mode === 'essay' ? 'Isian Singkat' : 'Essay Project');
+  badge.classList.toggle('essay', mode === 'essay');
+
+  document.getElementById('totalNum').textContent = state.questions.length;
+  document.getElementById('totalCount').textContent = state.questions.length;
+
+  buildQuestionGrid();
+  renderQuestion();
+  startTimer();
+  showScreen('exam');
+}
+
+/* ============================================================
+   TIMER
+   ============================================================ */
+function startTimer() {
+  updateTimerDisplay();
+  if (state.timerInterval) clearInterval(state.timerInterval);
+  state.timerInterval = setInterval(() => {
+    state.timeLeft--;
+    updateTimerDisplay();
+    if (state.timeLeft <= 0) {
+      clearInterval(state.timerInterval);
+      submitExam(true);
+    }
+  }, 1000);
+}
+
+function updateTimerDisplay() {
+  const m = Math.floor(state.timeLeft / 60);
+  const s = state.timeLeft % 60;
+  const txt = String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+  document.getElementById('timerValue').textContent = txt;
+  const t = document.getElementById('timer');
+  t.classList.remove('warning', 'danger');
+  if (state.timeLeft <= 120) t.classList.add('danger');
+  else if (state.timeLeft <= 600) t.classList.add('warning');
+}
+
+/* ============================================================
+   RENDER QUESTION
+   ============================================================ */
+function renderQuestion() {
+  const i = state.current;
+  const q = state.questions[i];
+
+  document.getElementById('currentNum').textContent = i + 1;
+
+  // Render question text; pisahkan blok kode (setelah baris kosong) ke <pre> monospace
+  const qtEl = document.getElementById('questionText');
+  qtEl.innerHTML = '';
+  const splitIdx = q.q.indexOf('\n\n');
+  if (state.mode === 'project') {
+    qtEl.textContent = 'Essay Project ' + (i + 1) + ' dari ' + state.questions.length;
+  } else if (splitIdx !== -1) {
+    const intro = q.q.slice(0, splitIdx);
+    const code = q.q.slice(splitIdx + 2);
+    const introEl = document.createElement('div');
+    introEl.className = 'q-intro';
+    introEl.textContent = intro;
+    const codeEl = document.createElement('pre');
+    codeEl.className = 'q-code';
+    codeEl.textContent = code;
+    qtEl.appendChild(introEl);
+    qtEl.appendChild(codeEl);
+  } else {
+    qtEl.textContent = q.q;
+  }
+
+  const area = document.getElementById('answerArea');
+  area.innerHTML = '';
+
+  if (state.mode === 'mc') {
+    const letters = ['a', 'b', 'c', 'd'];
+    const wrap = document.createElement('div');
+    wrap.className = 'options';
+    q.o.forEach((opt, idx) => {
+      const div = document.createElement('label');
+      div.className = 'option' + (state.answers[i] === idx ? ' selected' : '');
+      div.innerHTML = `
+        <input type="radio" name="opt" value="${idx}" ${state.answers[i] === idx ? 'checked' : ''}>
+        <div class="opt-letter">${letters[idx]}</div>
+        <div class="opt-text">${opt}</div>`;
+      div.addEventListener('click', () => selectOption(idx));
+      wrap.appendChild(div);
+    });
+    area.appendChild(wrap);
+  } else if (state.mode === 'essay') {
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.className = 'essay-input';
+    input.placeholder = 'Ketik jawaban kamu di sini…';
+    input.value = state.answers[i] || '';
+    input.autocomplete = 'off';
+    input.spellcheck = false;
+    input.addEventListener('input', e => {
+      state.answers[i] = e.target.value;
+      updateGridAndCount();
+    });
+    input.addEventListener('keydown', e => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        if (state.current < state.questions.length - 1) nextQuestion();
+      }
+    });
+    area.appendChild(input);
+    const hint = document.createElement('div');
+    hint.className = 'essay-hint';
+    hint.innerHTML = `
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+      <span>Tulis jawaban singkat (angka atau satu kata). Penulisan harus tepat, jadi periksa lagi sebelum lanjut ya.</span>`;
+    area.appendChild(hint);
+    setTimeout(() => input.focus(), 50);
+  } else if (state.mode === 'project') {
+    // Tampilkan brief proyek
+    const brief = document.createElement('div');
+    brief.className = 'project-brief';
+    const tag = document.createElement('span');
+    tag.className = 'pb-tag';
+    tag.textContent = 'Tugas Proyek · Menengah–Sulit';
+    const body = document.createElement('div');
+    body.textContent = q.q;
+    brief.appendChild(tag);
+    brief.appendChild(body);
+    area.appendChild(brief);
+    // Area menulis kode
+    const ta = document.createElement('textarea');
+    ta.className = 'project-code-input';
+    ta.placeholder = 'Tulis langkah penyelesaianmu di sini...';
+    ta.value = state.answers[i] || '';
+    ta.spellcheck = false;
+    ta.autocomplete = 'off';
+    ta.addEventListener('input', e => {
+      state.answers[i] = e.target.value;
+      updateGridAndCount();
+    });
+    area.appendChild(ta);
+    const hint = document.createElement('div');
+    hint.className = 'essay-hint';
+    hint.innerHTML = `
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+      <span>Tulis langkah &amp; jawabanmu, lalu tekan "Selesai &amp; Kumpulkan". Contoh penyelesaian akan ditampilkan untuk kamu cek sendiri.</span>`;
+    area.appendChild(hint);
+    setTimeout(() => ta.focus(), 50);
+  }
+
+  // Update buttons
+  document.getElementById('prevBtn').disabled = i === 0;
+  const nextBtn = document.getElementById('nextBtn');
+  nextBtn.disabled = i === state.questions.length - 1;
+  nextBtn.innerHTML = i === state.questions.length - 1
+    ? 'Selesai <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>'
+    : 'Selanjutnya <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>';
+
+  updateGridAndCount();
+}
+
+function selectOption(idx) {
+  state.answers[state.current] = idx;
+  renderQuestion();
+}
+
+/* ============================================================
+   NAVIGATION
+   ============================================================ */
+function prevQuestion() {
+  if (state.current > 0) {
+    state.current--;
+    renderQuestion();
+  }
+}
+function nextQuestion() {
+  if (state.current < state.questions.length - 1) {
+    state.current++;
+    renderQuestion();
+  }
+}
+function goToQuestion(i) {
+  state.current = i;
+  renderQuestion();
+}
+
+/* ============================================================
+   GRID
+   ============================================================ */
+function buildQuestionGrid() {
+  const grid = document.getElementById('questionGrid');
+  grid.innerHTML = '';
+  for (let i = 0; i < state.questions.length; i++) {
+    const btn = document.createElement('button');
+    btn.className = 'q-btn';
+    btn.textContent = i + 1;
+    btn.addEventListener('click', () => goToQuestion(i));
+    grid.appendChild(btn);
+  }
+}
+
+function updateGridAndCount() {
+  const grid = document.getElementById('questionGrid');
+  let answered = 0;
+  Array.from(grid.children).forEach((btn, i) => {
+    btn.classList.remove('current', 'answered');
+    const a = state.answers[i];
+    const isAnswered = (state.mode === 'mc' && a !== null) || ((state.mode === 'essay' || state.mode === 'project') && a && a.trim() !== '');
+    if (isAnswered) {
+      btn.classList.add('answered');
+      answered++;
+    }
+    if (i === state.current) btn.classList.add('current');
+  });
+  document.getElementById('answeredCount').textContent = answered;
+  // Progress bar = jumlah soal yg sudah dijawab dibanding total soal (sinkron dgn oval count)
+  const pct = (answered / state.questions.length) * 100;
+  document.getElementById('progressFill').style.width = pct + '%';
+}
+
+/* ============================================================
+   SUBMIT
+   ============================================================ */
+function confirmSubmit() {
+  document.getElementById('modalTitle').textContent = 'Kumpulkan Jawaban?';
+  document.getElementById('modalText').textContent = 'Setelah dikumpulkan, kamu tidak dapat mengubah jawaban. Pastikan semua soal sudah kamu jawab semaksimal mungkin.';
+  document.getElementById('modal').classList.add('active');
+}
+function closeModal() { document.getElementById('modal').classList.remove('active'); }
+
+function submitExam(timeUp = false) {
+  closeModal();
+  if (state.finished) return;
+  state.finished = true;
+  if (state.timerInterval) clearInterval(state.timerInterval);
+
+  // Essay Project: tidak dinilai otomatis — tampilkan layar hasil proyek khusus
+  if (state.mode === 'project') {
+    showProjectResult();
+    return;
+  }
+
+  // Compute results
+  let correct = 0, wrong = 0, skipped = 0;
+  const results = state.questions.map((q, i) => {
+    const ans = state.answers[i];
+    let status = 'skipped';
+    if (state.mode === 'mc') {
+      if (ans === null) skipped++;
+      else if (ans === q.a) { correct++; status = 'correct'; }
+      else { wrong++; status = 'wrong'; }
+    } else {
+      if (!ans || ans.trim() === '') skipped++;
+      else if (normalizeEssay(ans) === normalizeEssay(q.a)) { correct++; status = 'correct'; }
+      else { wrong++; status = 'wrong'; }
+    }
+    return { question: q, userAnswer: ans, status };
+  });
+
+  state.results = results;
+  showResults(correct, wrong, skipped);
+}
+
+function normalizeEssay(text) {
+  if (text === null || text === undefined) return '';
+  return String(text)
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g, ' ')
+    .replace(/\s*:\s*/g, ': ')   // toleransi: spasi di sekitar titik dua ("Warna : Merah" = "Warna: Merah")
+    .replace(/\.(\d{3})/g, '$1')  // toleransi: abaikan titik sbg pemisah ribuan (Indonesia)
+    .replace(/,/g, '.');          // accept both "1,25" and "1.25"
+}
+
+/* ============================================================
+   RESULTS — REVISI 2: threshold lulus berbasis PERSENTASE
+   ============================================================ */
+function showResults(correct, wrong, skipped) {
+  const total = state.questions.length;
+  const pctCorrect = (correct / total) * 100;
+  const threshold = getPassThreshold();
+  const pass = pctCorrect > threshold;
+
+  recordScore(state.mode, pctCorrect); // simpan untuk Nilai Gabungan
+
+  document.getElementById('statTotal').textContent = total;
+  document.getElementById('statCorrect').textContent = correct;
+  document.getElementById('statWrong').textContent = wrong;
+  document.getElementById('statSkipped').textContent = skipped;
+  document.getElementById('statScore').textContent = Math.round(pctCorrect);
+
+  const banner = document.getElementById('resultBanner');
+  const status = document.getElementById('resultStatus');
+  const msg = document.getElementById('resultMessage');
+  const label = document.getElementById('resultLabel');
+
+  banner.classList.remove('pass', 'fail');
+
+  if (pass) {
+    banner.classList.add('pass');
+    status.innerHTML = '<em>Lulus</em>';
+    label.textContent = 'Status Kelulusan';
+    msg.textContent = `Selamat! Persentase jawaban benarmu ${pctCorrect.toFixed(1)}% — di atas ambang batas ${threshold}%. Kamu dinyatakan LULUS.`;
+  } else {
+    banner.classList.add('fail');
+    status.innerHTML = pctCorrect >= 40 ? '<em>Hampir</em>' : '<em>Belum Lulus</em>';
+    label.textContent = 'Status Hasil';
+    msg.textContent = `Persentase jawaban benarmu ${pctCorrect.toFixed(1)}% dari total ${total} soal. Syarat lulus: lebih dari ${threshold}%. Tetap semangat dan coba lagi!`;
+  }
+
+  showScreen('result');
+}
+
+/* ============================================================
+   REVIEW
+   ============================================================ */
+function showReview() {
+  const list = document.getElementById('reviewList');
+  list.innerHTML = '';
+  const letters = ['a', 'b', 'c', 'd'];
+
+  state.results.forEach((r, i) => {
+    const item = document.createElement('div');
+    item.className = 'review-item ' + r.status;
+
+    const statusLabel = r.status === 'correct' ? 'Benar' : r.status === 'wrong' ? 'Salah' : 'Tidak Dijawab';
+
+    let userAnsHtml = '';
+    let correctAnsHtml = '';
+
+    if (state.mode === 'mc') {
+      const q = r.question;
+      const userIdx = r.userAnswer;
+      const correctIdx = q.a;
+      const userText = userIdx !== null ? `${letters[userIdx]}. ${q.o[userIdx]}` : '—';
+      const correctText = `${letters[correctIdx]}. ${q.o[correctIdx]}`;
+      const userClass = r.status === 'skipped' ? 'skipped' : (r.status === 'correct' ? 'user-correct' : 'user-wrong');
+      userAnsHtml = `<div class="review-answer ${userClass}"><span class="ra-label">Jawabanmu</span>${userText}</div>`;
+      if (r.status !== 'correct') {
+        correctAnsHtml = `<div class="review-answer actual"><span class="ra-label">Jawaban Benar</span>${correctText}</div>`;
+      }
+    } else {
+      const q = r.question;
+      const userAns = r.userAnswer && r.userAnswer.trim() !== '' ? r.userAnswer : '—';
+      const userClass = r.status === 'skipped' ? 'skipped' : (r.status === 'correct' ? 'user-correct' : 'user-wrong');
+      userAnsHtml = `<div class="review-answer ${userClass}"><span class="ra-label">Jawabanmu</span>${escapeHtml(userAns)}</div>`;
+      if (r.status !== 'correct') {
+        correctAnsHtml = `<div class="review-answer actual"><span class="ra-label">Jawaban Benar</span>${escapeHtml(q.a)}</div>`;
+      }
+    }
+
+    item.innerHTML = `
+      <div class="review-q-num">
+        <span>Soal ${i + 1}</span>
+        <span class="review-status ${r.status}">${statusLabel}</span>
+      </div>
+      <div class="review-question">${escapeHtml(r.question.q)}</div>
+      <div class="review-answers">${userAnsHtml}${correctAnsHtml}</div>
+    `;
+    list.appendChild(item);
+  });
+
+  showScreen('review');
+}
+function backToResult() { showScreen('result'); }
+
+function escapeHtml(str) {
+  return String(str).replace(/[&<>"']/g, ch => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+  }[ch]));
+}
+
+/* ============================================================
+   RETURN HOME
+   ============================================================ */
+function returnHome() {
+  document.body.classList.remove('mode-mc', 'mode-essay', 'mode-project');
+  renderRecap();
+  showScreen('welcome');
+}
+
+/* ============================================================
+   PROJECT RESULT (Essay Project — dinilai berbasis KEMIRIPAN
+   jawaban peserta dengan contoh penyelesaian)
+   ============================================================ */
+
+/* Tokenisasi kode: samakan komentar, tanda kutip, huruf kecil */
+function tokenizeCode(s) {
+  if (!s) return [];
+  return s
+    .replace(/#[^\n]*/g, '#')        // isi komentar diseragamkan (cukup tandai ada '#')
+    .toLowerCase()
+    .replace(/['"`]/g, '"')          // seragamkan tanda kutip
+    .match(/[a-z_]\w*|\d+\.?\d*|"[^"]*"|[^\s\w]/g) || [];
+}
+
+/* Skor kemiripan 0–100: gabungan urutan (LCS) + irisan token (Jaccard) */
+function codeSimilarity(userText, modelText) {
+  const A = tokenizeCode(userText);
+  const B = tokenizeCode(modelText);
+  if (A.length === 0 || B.length === 0) return 0;
+
+  // Longest Common Subsequence (urutan) — DP hemat memori
+  const n = A.length, m = B.length;
+  let prev = new Array(m + 1).fill(0);
+  let cur = new Array(m + 1).fill(0);
+  for (let i = 1; i <= n; i++) {
+    for (let j = 1; j <= m; j++) {
+      cur[j] = (A[i - 1] === B[j - 1]) ? prev[j - 1] + 1 : Math.max(prev[j], cur[j - 1]);
+    }
+    const tmp = prev; prev = cur; cur = tmp; cur.fill(0);
+  }
+  const lcsRatio = (2 * prev[m]) / (n + m);
+
+  // Jaccard (irisan kumpulan token)
+  const setA = new Set(A), setB = new Set(B);
+  let inter = 0;
+  setA.forEach(t => { if (setB.has(t)) inter++; });
+  const uni = new Set([...setA, ...setB]).size;
+  const jacc = uni === 0 ? 0 : inter / uni;
+
+  const score = (0.6 * lcsRatio + 0.4 * jacc) * 100;
+  return Math.max(0, Math.min(100, Math.round(score)));
+}
+
+/* Cek tiap kriteria soal pada kode peserta (dasar penilaian Essay Project).
+   Pengecekan bersifat longgar: nama variabel & angka boleh berbeda dari contoh,
+   yang penting langkah yang diminta soal benar-benar ditulis. */
+function checkProject(userText, checks) {
+  const code = String(userText || '');
+  return (checks || PROJECT_CHECKS).map(c => ({
+    label: c.label,
+    hint: c.hint,
+    ok: c.res.every(r => new RegExp(r, 'i').test(code))
+  }));
+}
+
+function showProjectResult() {
+  const projects = state.questions;
+  const box = document.getElementById('prProjects');
+  box.innerHTML = '';
+  const threshold = getPassThreshold();
+  let sumSim = 0;
+
+  projects.forEach((p, k) => {
+    const user = state.answers[k];
+    const checks = checkProject(user, p.checks);
+    const passed = checks.filter(c => c.ok).length;
+    const total = checks.length;
+    const sim = total ? Math.round((passed / total) * 100) : 0;
+    const weight = total ? (100 / total) : 0;
+    const pass = sim >= threshold;
+    sumSim += sim;
+
+    let checksHtml = '';
+    checks.forEach(c => {
+      checksHtml +=
+        '<div class="pc-item ' + (c.ok ? 'ok' : 'no') + '">' +
+          '<div class="pc-mark">' + (c.ok ? '&#10004;' : '&#10008;') + '</div>' +
+          '<div class="pc-body">' +
+            '<div class="pc-label">' + escapeHtml(c.label) + '</div>' +
+            '<div class="pc-hint">Contoh di jawaban benar: <code>' + escapeHtml(c.hint) + '</code></div>' +
+            '<div class="pc-verdict">' + (c.ok
+                ? 'Ada di kodemu &rarr; dapat ' + weight.toFixed(1) + '%'
+                : 'Belum ada di kodemu &rarr; dapat 0%') + '</div>' +
+          '</div>' +
+        '</div>';
+    });
+
+    const hasCode = user && user.trim() !== '';
+    const userCode = hasCode ? escapeHtml(user) : '(Kamu belum menuliskan jawaban apa pun.)';
+
+    const block = document.createElement('div');
+    block.className = 'pr-proj-block';
+    block.innerHTML =
+      '<div class="pr-proj-head ' + (pass ? 'pass' : 'fail') + '">' +
+        'Essay Project ' + (k + 1) + ' — ' + (pass ? 'LULUS' : 'BELUM LULUS') +
+        ' (' + passed + '/' + total + ' kriteria · ' + sim + '%)' +
+      '</div>' +
+      '<div class="pr-section"><h3>📝 Soal Proyek</h3>' +
+        '<div class="project-brief" style="white-space:pre-wrap">' + escapeHtml(p.q) + '</div></div>' +
+      '<div class="pr-section"><h3>⚖️ Jawabanmu vs Jawaban yang Benar</h3>' +
+        '<div class="pr-compare">' +
+          '<div class="pr-col"><div class="pr-col-head user">⌨️ Jawaban yang Kamu Tulis</div>' +
+            '<pre class="pr-code' + (hasCode ? '' : ' empty') + '">' + userCode + '</pre></div>' +
+          '<div class="pr-col"><div class="pr-col-head model">✅ Jawaban yang Benar (contoh)</div>' +
+            '<pre class="pr-code">' + escapeHtml(p.solution) + '</pre></div>' +
+        '</div></div>' +
+      '<div class="pr-section"><h3>🔎 Rincian Penilaian (dihitung otomatis)</h3>' +
+        '<div class="pr-checks">' + checksHtml + '</div>' +
+        '<div class="pr-formula"><strong>Perhitungan nilai:</strong> ' + passed + ' &divide; ' + total +
+        ' &times; 100% = <strong>' + sim + '%</strong>. Tiap kriteria bernilai ' + weight.toFixed(1) + '%.</div>' +
+      '</div>';
+    box.appendChild(block);
+  });
+
+  const overall = projects.length ? Math.round(sumSim / projects.length) : 0;
+  const pass = overall >= threshold;
+  recordScore('project', overall);
+
+  document.getElementById('prScorePercent').textContent = overall + '%';
+  const scoreBox = document.getElementById('prScore');
+  scoreBox.classList.remove('pass', 'fail');
+  scoreBox.classList.add(pass ? 'pass' : 'fail');
+  document.getElementById('prScoreStatus').textContent = pass
+    ? 'LULUS — rata-rata ' + projects.length + ' proyek = ' + overall + '%, batas lulus ' + threshold + '%'
+    : 'BELUM LULUS — rata-rata ' + projects.length + ' proyek = ' + overall + '%, batas lulus ' + threshold + '%';
+
+  showScreen('projectResult');
+}
+
+/* ============================================================
+   KEYBOARD SHORTCUTS
+   ============================================================ */
+document.addEventListener('keydown', (e) => {
+  if (!document.getElementById('exam').classList.contains('active')) return;
+  if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+  if (e.key === 'ArrowLeft') prevQuestion();
+  else if (e.key === 'ArrowRight') nextQuestion();
+  else if (state.mode === 'mc' && ['a','b','c','d'].includes(e.key.toLowerCase())) {
+    const idx = ['a','b','c','d'].indexOf(e.key.toLowerCase());
+    selectOption(idx);
+  }
+});
+
+/* Prevent accidental page exit during exam */
+window.addEventListener('beforeunload', (e) => {
+  if (document.getElementById('exam').classList.contains('active') && !state.finished) {
+    e.preventDefault();
+    e.returnValue = '';
+  }
+});
+
+/* ============================================================
+   INISIALISASI
+   ============================================================ */
+window.addEventListener('DOMContentLoaded', () => {
+  renderRecap(); // tampilkan skor tersimpan (jika ada)
+  const pt = document.getElementById('passThreshold');
+  if (pt) pt.addEventListener('change', renderRecap); // ubah Batas Lulus -> verdict ikut diperbarui
+});
+</script>
+</body>
+</html>
+
+
+
